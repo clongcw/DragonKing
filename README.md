@@ -7,4 +7,4 @@
 ## 界面预览
 
 
-![anchor text](./SharedLibraries/Image/main.png "主界面")
+![anchor text](./Image/main.png "主界面")
