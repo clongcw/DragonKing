@@ -6,4 +6,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.89" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interface\" />
+    <Folder Include="DbContext\" />
+    <Folder Include="Service\" />
+  </ItemGroup>
+
 </Project>
