@@ -43,7 +43,7 @@ namespace DragonKing.ViewModel
             _userService = userService;
 
 
-            string userstring = JsonUtils.ReadJsonFile(Environment.CurrentDirectory + @"\Files\user.json");
+            string userstring = JsonUtil.ReadJsonFile(Environment.CurrentDirectory + @"\Configuration\user.json");
 
             CurrentUser = JsonConvert.DeserializeObject<User>(userstring);
 
@@ -60,13 +60,21 @@ namespace DragonKing.ViewModel
         public void SignIn()
         {
             User user = _userService.GetUserByName(Username);
-            //将当前的配置序列化为json字符串
-            CurrentUser.Enabled = Enabled;
-            var content = JsonConvert.SerializeObject(CurrentUser);
-            JsonUtils.WriteJsonFile(Environment.CurrentDirectory + @"\Files\user.json", content);
+            
+
 
             if (user != null && user.Password == Password)
             {
+                #region 记住登录信息
+                //将当前的配置序列化为json字符串
+                CurrentUser.Enabled = Enabled;
+                CurrentUser.Enabled = Enabled;
+                CurrentUser.Name = Username;
+                CurrentUser.Password = Password;
+                var content = JsonConvert.SerializeObject(CurrentUser);
+                JsonUtil.WriteJsonFile(Environment.CurrentDirectory + @"\Configuration\user.json", content);
+                #endregion
+
                 var mainView = App.Current._host.Services.GetRequiredService<MainView>();
                 mainView.DataContext = App.Current._host.Services.GetRequiredService<MainViewModel>();
                 mainView!.Show();

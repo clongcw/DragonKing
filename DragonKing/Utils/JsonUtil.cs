@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DragonKing.Utils
 {
-    public class JsonUtils
+    public class JsonUtil
     {
         /// <summary>
         /// 将序列化的json字符串内容写入Json文件，并且保存
