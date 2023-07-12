@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <None Remove="Model\**" />
+    <Page Remove="Model\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
@@ -18,10 +25,6 @@
     <ProjectReference Include="..\SharedLibraries\DragonKing.Database\DragonKing.Database.csproj" />
     <ProjectReference Include="..\SharedLibraries\DragonKing.Log\DragonKing.Log.csproj" />
     <ProjectReference Include="..\SharedLibraries\DragonKing.UI\DragonKing.UI.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

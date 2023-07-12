@@ -1,13 +1,7 @@
 ﻿using SqlSugar;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DragonKing.Database.EntityModel

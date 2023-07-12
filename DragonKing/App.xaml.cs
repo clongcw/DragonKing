@@ -1,19 +1,8 @@
 ﻿using DragonKing.HostBuilders;
-using DragonKing.Log.Interface;
-using DragonKing.Log.Service;
 using DragonKing.View;
 using DragonKing.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Serilog.Core;
-using SqlSugar;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace DragonKing

@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using DragonKing.Database.EntityModel;
 using DragonKing.Database.Interface;
@@ -10,11 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace DragonKing.ViewModel
@@ -60,7 +54,7 @@ namespace DragonKing.ViewModel
         public void SignIn()
         {
             User user = _userService.GetUserByName(Username);
-            
+
 
 
             if (user != null && user.Password == Password)

@@ -1,12 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using DragonKing.Database.DbContext;
 using DragonKing.Database.Interface;
-using DragonKing.Database.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DragonKing.ViewModel
 {
