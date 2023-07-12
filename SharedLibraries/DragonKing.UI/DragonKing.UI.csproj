@@ -7,7 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Themes\" />
+    <None Remove="Resources\Images\innowavelogo.png" />
+    <None Remove="Resources\Images\sign_in_background.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.14.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\innowavelogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\sign_in_background.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

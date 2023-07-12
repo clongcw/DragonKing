@@ -1,10 +1,14 @@
-﻿using DragonKing.Log.Interface;
+﻿using DragonKing.HostBuilders;
+using DragonKing.Log.Interface;
 using DragonKing.Log.Service;
 using DragonKing.View;
 using DragonKing.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog.Core;
+using SqlSugar;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -21,34 +25,32 @@ namespace DragonKing
     {
         public new static App? Current => Application.Current as App;
 
+        public readonly IHost _host;
+
 
         public App()
         {
-            Services = ConfigureServices();
-
+            _host = CreateHostBuilder().Build();
         }
 
-        public IServiceProvider Services { get; private set; }
-
-        private static IServiceProvider ConfigureServices()
+        public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
-            var services = new ServiceCollection();
-            services.AddSingleton<ILog, LogService>();
-            services.AddSingleton<MainView>();
-            services.AddSingleton<MainViewModel>();
-
-
-
-
-            return services.BuildServiceProvider();
+            return Host.CreateDefaultBuilder(args)
+                .AddDbContext()
+                .AddServices()
+                .AddViewModels()
+                .AddViews();
         }
+
 
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var mainWindow = Services.GetService<MainView>();
-            mainWindow.DataContext = Services.GetService<MainViewModel>();
-            mainWindow!.Show();
+            _host.Start();
+
+            var loginView = _host.Services.GetRequiredService<LoginView>();
+            loginView.DataContext = _host.Services.GetRequiredService<LoginViewModel>();
+            loginView!.Show();
         }
     }
 }

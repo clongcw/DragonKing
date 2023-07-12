@@ -1,0 +1,88 @@
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.Input;
+using DragonKing.Database.EntityModel;
+using DragonKing.Database.Interface;
+using DragonKing.Log.Interface;
+using DragonKing.Utils;
+using DragonKing.View;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Panuon.WPF.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace DragonKing.ViewModel
+{
+    public partial class LoginViewModel : ObservableObject
+    {
+        #region Property
+        [ObservableProperty]
+        private string _username;
+        [ObservableProperty]
+        private string _password;
+        [ObservableProperty]
+        private bool _enabled;
+        [ObservableProperty]
+        private User _currentUser;
+        #endregion
+
+
+        private readonly ILog _log;
+
+        private readonly IUserService _userService;
+
+        public LoginViewModel(ILog log, IUserService userService)
+        {
+            _log = log;
+            _userService = userService;
+
+
+            string userstring = JsonUtils.ReadJsonFile(Environment.CurrentDirectory + @"\Files\user.json");
+
+            CurrentUser = JsonConvert.DeserializeObject<User>(userstring);
+
+            if (CurrentUser.Enabled)
+            {
+                Username = CurrentUser.Name;
+                Password = CurrentUser.Password;
+                Enabled = CurrentUser.Enabled;
+            }
+        }
+
+        #region 登录
+        [RelayCommand]
+        public void SignIn()
+        {
+            User user = _userService.GetUserByName(Username);
+            //将当前的配置序列化为json字符串
+            CurrentUser.Enabled = Enabled;
+            var content = JsonConvert.SerializeObject(CurrentUser);
+            JsonUtils.WriteJsonFile(Environment.CurrentDirectory + @"\Files\user.json", content);
+
+            if (user != null && user.Password == Password)
+            {
+                var mainView = App.Current._host.Services.GetRequiredService<MainView>();
+                mainView.DataContext = App.Current._host.Services.GetRequiredService<MainViewModel>();
+                mainView!.Show();
+
+                App.Current._host.Services.GetRequiredService<LoginView>().Close();
+
+                _log.Debug($"此次登录的用户名：{Username}，密码：{Password}，登录时间：{DateTime.Now}");
+            }
+            else
+            {
+                MessageBoxX.Show(Application.Current.MainWindow, "用户名或密码错误！", "提示", MessageBoxButton.OK, MessageBoxIcon.Error, DefaultButton.YesOK, 5);
+            }
+
+
+
+        }
+        #endregion
+    }
+}
