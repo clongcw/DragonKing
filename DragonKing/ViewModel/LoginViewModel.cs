@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
+using System.IO;
 using System.Windows;
 
 namespace DragonKing.ViewModel
@@ -36,8 +37,28 @@ namespace DragonKing.ViewModel
             _log = log;
             _userService = userService;
 
+            string jsonPath = Environment.CurrentDirectory + @"\Configuration";
+            string jsonName = @"user.json";
+            string wholeName = Path.Combine(jsonPath, jsonName);
 
-            string userstring = JsonUtil.ReadJsonFile(Environment.CurrentDirectory + @"\Configuration\user.json");
+            #region json文件不存在就创建
+            if (!Directory.Exists(jsonPath))
+            {
+                // 创建文件夹并设置文件夹的访问权限为可读可写
+                Directory.CreateDirectory(jsonPath).Attributes = FileAttributes.Normal;
+            }
+
+            if (!File.Exists(wholeName))
+            {
+                // 创建文件
+                using (FileStream fs = File.Create(wholeName)) ;
+                User user = _userService.GetUserByName("Admin");
+                JsonUtil.WriteJsonFile(wholeName, JsonConvert.SerializeObject(user));
+            }
+            #endregion
+
+
+            string userstring = JsonUtil.ReadJsonFile(wholeName);
 
             CurrentUser = JsonConvert.DeserializeObject<User>(userstring);
 
