@@ -10,6 +10,8 @@ namespace DragonKing.View
         public MainView()
         {
             InitializeComponent();
+
+            
         }
     }
 }

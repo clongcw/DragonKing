@@ -1,13 +1,44 @@
-﻿<Window x:Class="DragonKing.View.MainView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DragonKing.View"
-        WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
-    <Grid>
+﻿<Window
+    x:Class="DragonKing.View.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DragonKing.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
+    Title="MainView"
+    Width="800"
+    Height="450"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <StackPanel>
         
-    </Grid>
+        <DataGrid
+            MinWidth="100"
+            Margin="50"
+            AutoGenerateColumns="False"
+            Background="Transparent"
+            BorderThickness="0"
+            CanUserSortColumns="False"
+            FrozenColumnCount="4"
+            ItemsSource="{Binding Users, IsAsync=True}"
+            RowHeaderWidth="60"
+            Style="{StaticResource dgstyle}"
+            CellStyle="{StaticResource cellstyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Name}"
+                    Header="用户名" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Password}"
+                    Header="密码" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding RoleId}"
+                    Header="电话" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
 </Window>
