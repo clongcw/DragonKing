@@ -23,6 +23,7 @@
                         CanUserSortColumns="False"
                         FrozenColumnCount="4"
                         ItemsSource="{Binding UserList, IsAsync=True}"
+                        SelectedItem="{Binding SelectedUser}"
                         RowHeaderWidth="60"
                         Style="{StaticResource dgstyle}">
                         <DataGrid.Columns>
@@ -74,6 +75,7 @@
                         CanUserSortColumns="False"
                         FrozenColumnCount="4"
                         ItemsSource="{Binding RoleList, IsAsync=True}"
+                        SelectedItem="{Binding SelectedRole}"
                         RowHeaderWidth="60"
                         Style="{StaticResource dgstyle}">
                          

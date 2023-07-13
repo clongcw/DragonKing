@@ -1,5 +1,5 @@
 ﻿<pu:WindowX
-    x:Class="DragonKing.View.UserManagement.SingleUser"
+    x:Class="DragonKing.View.UserManagement.SingleRole"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cv="clr-namespace:DragonKing.Converter"
@@ -8,16 +8,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
     Width="300"
-    Height="200"
+    Height="210"
+    pu:WindowXCaption.Height="0"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-   pu:WindowXCaption.Height="0"
     mc:Ignorable="d">
-    <!--<pu:WindowX.Resources>
-        <cv:CNToENVisualConverter x:Key="CNToENVisualConverter"/>
-    </pu:WindowX.Resources>-->
     <Border CornerRadius="10">
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
+        <StackPanel>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -39,11 +36,12 @@
                     Margin="10"
                     FontSize="22"
                     Foreground="White"
-                    Text="用户" />
+                    Text="角色" />
             </Grid>
 
             <Grid Margin="20">
                 <Grid.RowDefinitions>
+                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
@@ -55,37 +53,48 @@
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
+
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
-                    Text="用户名称" />
+                    Text="角色名称" />
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Text="{Binding Name}" />
+                    Text="{Binding RoleName}" />
+
 
                 <TextBlock
                     Grid.Row="2"
                     Grid.Column="0"
-                    Text="用户密码" />
-                <TextBox
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Text="{Binding Password}" />
-
-                <TextBlock
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    Text="角色" />
+                    Text="Lis设置" />
                 <ComboBox
+                    x:Name="visuallist"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    SelectedValue="{Binding Privileges[0].Visiual, Converter={cv:CNToENVisualConverter}}" />
+
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="报告设置" />
+                <ComboBox
+                    x:Name="sunFunvisuallist"
                     Grid.Row="3"
                     Grid.Column="1"
-                    ItemsSource="{Binding RoleNames}"
-                    SelectedValue="{Binding Role.RoleName}" />
+                    SelectedValue="{Binding Privileges[1].Visiual, Converter={cv:CNToENVisualConverter}}" />
 
-
-                <WrapPanel
+                <TextBlock
                     Grid.Row="4"
+                    Grid.Column="0"
+                    Text="用户设置" />
+                <ComboBox
+                    x:Name="visuallistbutton"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    SelectedValue="{Binding Privileges[2].Visiual, Converter={cv:CNToENVisualConverter}}" />
+                <WrapPanel
+                    Grid.Row="5"
                     Grid.ColumnSpan="2"
                     HorizontalAlignment="Center">
                     <Button

@@ -4,13 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace DragonKing.Converter
 {
-    public class CNToENVisualConverter : IValueConverter
+    public class CNToENVisualConverter : ValueConverterBase<CNToENVisualConverter>
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string CN = (string)value;
             if (CN == "Visible")
@@ -27,7 +28,7 @@ namespace DragonKing.Converter
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string CN = (string)value;
             if (CN == "显示")

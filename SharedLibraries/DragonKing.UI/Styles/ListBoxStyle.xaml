@@ -51,7 +51,8 @@
         x:Key="SubMenuListBoxStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.ListBoxStyle}}"
         TargetType="ListBox">
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="0 0 0 10" />
+        <Setter Property="BorderBrush" Value="#34C9A5" />
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">

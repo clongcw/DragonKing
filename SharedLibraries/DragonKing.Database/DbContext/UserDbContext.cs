@@ -2,6 +2,7 @@
 using DragonKing.Database.EntityModel;
 using SqlSugar;
 using System;
+using System.Collections.Generic;
 
 namespace DragonKing.Database.DbContext
 {

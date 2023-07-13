@@ -58,7 +58,11 @@ namespace DragonKing.Database.Service
 
         public bool UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            return _context.UserDb.Context.UpdateNav(user)
+                .Include(s => s.Role)
+                .ThenInclude(s => s.Privileges)
+                .ExecuteCommand();
+
         }
 
         public bool UpdateUser()

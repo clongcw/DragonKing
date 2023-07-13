@@ -22,12 +22,20 @@ namespace DragonKing.Database.Service
 
         public Role GetRoleById(int id)
         {
-            throw new NotImplementedException();
+            return _context.RoleDb.Context.Queryable<Role>()
+                    .Where(s => s.Id == id)
+                    .Includes(p => p.Privileges, s => s.Role)
+                    .Includes(p => p.Users)
+                    .First();
         }
 
         public Role GetRoleByRoleName(string rolename)
         {
-            throw new NotImplementedException();
+            return _context.RoleDb.Context.Queryable<Role>()
+                    .Where(s => s.RoleName == rolename)
+                    .Includes(p => p.Privileges, s => s.Role)
+                    .Includes(p => p.Users)
+                    .First();
         }
 
         public List<Role> GetRoles()
@@ -45,7 +53,11 @@ namespace DragonKing.Database.Service
 
         public bool UpdateRole(Role role)
         {
-            throw new NotImplementedException();
+            bool result = _context.RoleDb.Context.UpdateNav(role)
+                .Include(s => s.Privileges)
+                .Include(s => s.Users)
+                .ExecuteCommand();
+            return result;
         }
     }
 }
