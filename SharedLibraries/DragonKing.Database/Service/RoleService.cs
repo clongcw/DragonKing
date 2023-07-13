@@ -32,7 +32,10 @@ namespace DragonKing.Database.Service
 
         public List<Role> GetRoles()
         {
-            throw new NotImplementedException();
+            return _context.RoleDb.Context.Queryable<Role>()
+                .Includes(t => t.Privileges)
+                .Includes(t => t.Users)
+                .ToList();
         }
 
         public void RemoverRole(Role role)

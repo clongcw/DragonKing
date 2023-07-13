@@ -14,6 +14,7 @@ namespace DragonKing.HostBuilders
             {
                 services.AddSingleton<LoginViewModel>(s => new LoginViewModel(s.GetRequiredService<ILog>(), s.GetRequiredService<IUserService>()));
                 services.AddSingleton<MainViewModel>(s => new MainViewModel(s.GetRequiredService<IUserService>(), s.GetRequiredService<IRoleService>()));
+                services.AddSingleton<UserManagementViewModel>(s => new UserManagementViewModel(s.GetRequiredService<ILog>(), s.GetRequiredService<IUserService>(), s.GetRequiredService<IRoleService>()));
 
             });
 

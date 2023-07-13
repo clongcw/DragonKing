@@ -1,4 +1,5 @@
 ﻿using DragonKing.View;
+using DragonKing.View.UserManagement;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -12,6 +13,7 @@ namespace DragonKing.HostBuilders
             {
                 services.AddSingleton<MainView>();
                 services.AddSingleton<LoginView>();
+                services.AddSingleton<UserManagementView>();
             });
 
             return host;

@@ -51,17 +51,5 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
-
-
-        <Setter Property="HorizontalGridLinesBrush" Value="Wheat">
-            <!--<Setter.Value>
-                <SolidColorBrush Color="{StaticResource DefaultBorderBrush}" />
-            </Setter.Value>-->
-        </Setter>
-        <Setter Property="VerticalGridLinesBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="Transparent" />
-            </Setter.Value>
-        </Setter>
     </Style>
 </ResourceDictionary>

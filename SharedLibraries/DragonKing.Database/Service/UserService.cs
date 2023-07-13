@@ -41,7 +41,9 @@ namespace DragonKing.Database.Service
 
         public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return _context.UserDb.Context.Queryable<User>()
+                .Includes(t => t.Role, t => t.Privileges)
+                .ToList();
         }
 
         public void RemoverUser(User user)
