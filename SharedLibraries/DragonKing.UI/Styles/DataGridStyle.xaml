@@ -25,11 +25,12 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="RowBackground" Value="#F7F7F7" />
         <Setter Property="AlternatingRowBackground" Value="#E5E5E5" />
-        <Setter Property="RowHeight" Value="30" />
+        <Setter Property="RowHeight" Value="60" />
+        <Setter Property="RowHeaderWidth" Value="60" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontFamily" Value="微软雅黑" />
         <Setter Property="GridLinesVisibility" Value="All" />
-        <Setter Property="CanUserResizeColumns" Value="True" />
+        <Setter Property="CanUserResizeColumns" Value="False" />
         <Setter Property="ColumnHeaderHeight" Value="35" />
         <Setter Property="pu:DataGridHelper.ColumnHeaderForeground" Value="#333333" />
         <Setter Property="pu:DataGridHelper.ColumnHeaderPanelBorderBrush" Value="#C9C9C9" />

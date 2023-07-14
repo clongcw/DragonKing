@@ -17,14 +17,17 @@ namespace DragonKing.Database.Service
 
         public bool AddRole(Role role)
         {
-            throw new NotImplementedException();
+            return _context.RoleDb.Context.InsertNav(role)
+                 .Include(z => z.Privileges)
+                 .ExecuteCommand();
+                
         }
 
         public Role GetRoleById(int id)
         {
             return _context.RoleDb.Context.Queryable<Role>()
                     .Where(s => s.Id == id)
-                    .Includes(p => p.Privileges, s => s.Role)
+                    .Includes(p => p.Privileges)
                     .Includes(p => p.Users)
                     .First();
         }
@@ -33,7 +36,7 @@ namespace DragonKing.Database.Service
         {
             return _context.RoleDb.Context.Queryable<Role>()
                     .Where(s => s.RoleName == rolename)
-                    .Includes(p => p.Privileges, s => s.Role)
+                    .Includes(p => p.Privileges)
                     .Includes(p => p.Users)
                     .First();
         }
@@ -43,12 +46,15 @@ namespace DragonKing.Database.Service
             return _context.RoleDb.Context.Queryable<Role>()
                 .Includes(t => t.Privileges)
                 .Includes(t => t.Users)
+                .OrderBy(p => p.Id)
                 .ToList();
         }
 
-        public void RemoverRole(Role role)
+        public bool RemoverRole(Role role)
         {
-            throw new NotImplementedException();
+          return  _context.RoleDb.Context.DeleteNav(role)
+                     .Include(z1 => z1.Privileges)
+                     .ExecuteCommand();
         }
 
         public bool UpdateRole(Role role)

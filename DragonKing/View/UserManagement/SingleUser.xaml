@@ -7,15 +7,12 @@
     xmlns:local="clr-namespace:DragonKing.View.UserManagement"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
-    Width="300"
-    Height="200"
+    Width="500"
+    Height="230"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
    pu:WindowXCaption.Height="0"
     mc:Ignorable="d">
-    <!--<pu:WindowX.Resources>
-        <cv:CNToENVisualConverter x:Key="CNToENVisualConverter"/>
-    </pu:WindowX.Resources>-->
     <Border CornerRadius="10">
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Grid>
@@ -91,10 +88,12 @@
                     <Button
                         Margin="2"
                         Click="Close_Click"
+                        Style="{StaticResource CaccelButtonStyle}"
                         Content="取消" />
                     <Button
                         Margin="2"
                         Click="Confirme_Click"
+                        Style="{StaticResource ConfirmButtonStyle}"
                         Content="确认" />
 
                 </WrapPanel>

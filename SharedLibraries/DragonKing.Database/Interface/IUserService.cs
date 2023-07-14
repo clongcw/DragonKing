@@ -7,7 +7,7 @@ namespace DragonKing.Database.Interface
     {
         List<User> GetUsers();
         bool AddUser(User user);
-        void RemoverUser(User user);
+        bool RemoverUser(User user);
         bool UpdateUser(User user);
         bool UpdateUser();
         bool UpdatePassword(User user, string strPassword, bool isReset);

@@ -12,9 +12,9 @@
     <Grid>
         <TabControl>
             <TabItem Header="用户列表">
-                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <DataGrid
-                        MaxWidth="600"
+                        
                         Margin="20"
                         AutoGenerateColumns="False"
                         Background="Transparent"
@@ -23,9 +23,10 @@
                         CanUserSortColumns="False"
                         FrozenColumnCount="4"
                         ItemsSource="{Binding UserList, IsAsync=True}"
-                        SelectedItem="{Binding SelectedUser}"
                         RowHeaderWidth="60"
-                        Style="{StaticResource dgstyle}">
+                        SelectedItem="{Binding SelectedUser}"
+                        Style="{StaticResource dgstyle}"
+                        CellStyle="{StaticResource cellstyle}">
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="*"
@@ -46,11 +47,13 @@
                                             <Button
                                                 x:Name="Delete"
                                                 Command="{Binding DeleteUserCommand}"
-                                                Content="删除" />
+                                                Content="删除"
+                                                Style="{StaticResource DeleteButtonStyle}" />
                                             <Button
                                                 x:Name="Property"
                                                 Command="{Binding UpdateUserCommand}"
-                                                Content="属性" />
+                                                Content="属性"
+                                                Style="{StaticResource PropertyButtonStyle}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -58,15 +61,19 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Margin="20">
-                        <Button Margin="10,0,0,10" Content="添加用户" />
+                        <Button
+                            Margin="10,0,0,10"
+                            Content="添加用户"
+                            Command="{Binding AddUserCommand}"
+                            Style="{StaticResource MainButtonStyle}" />
                     </StackPanel>
                 </WrapPanel>
 
             </TabItem>
             <TabItem Header="角色列表">
-                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <DataGrid
-                        MaxWidth="600"
+                        
                         Margin="20"
                         AutoGenerateColumns="False"
                         Background="Transparent"
@@ -76,9 +83,9 @@
                         FrozenColumnCount="4"
                         ItemsSource="{Binding RoleList, IsAsync=True}"
                         SelectedItem="{Binding SelectedRole}"
-                        RowHeaderWidth="60"
-                        Style="{StaticResource dgstyle}">
-                         
+                        Style="{StaticResource dgstyle}"
+                        CellStyle="{StaticResource cellstyle}">
+
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="*"
@@ -94,11 +101,13 @@
                                             <Button
                                                 x:Name="Delete"
                                                 Command="{Binding DeleteRoleCommand}"
-                                                Content="删除" />
+                                                Content="删除"
+                                                Style="{StaticResource DeleteButtonStyle}" />
                                             <Button
                                                 x:Name="Property"
                                                 Command="{Binding UpdateRoleCommand}"
-                                                Content="属性" />
+                                                Content="属性"
+                                                Style="{StaticResource PropertyButtonStyle}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -106,7 +115,11 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel Margin="20">
-                        <Button Margin="10,0,0,10" Content="添加角色" />
+                        <Button
+                            Margin="10,0,0,10"
+                            Content="添加角色"
+                            Command="{Binding AddRoleCommand}"
+                            Style="{StaticResource MainButtonStyle}" />
                     </StackPanel>
                 </WrapPanel>
             </TabItem>

@@ -3,6 +3,8 @@ using DragonKing.Database.EntityModel;
 using DragonKing.Database.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Xml.Linq;
 
 namespace DragonKing.Database.Service
 {
@@ -17,7 +19,19 @@ namespace DragonKing.Database.Service
 
         public bool AddUser(User user)
         {
-            throw new NotImplementedException();
+            var ur = _context.UserDb.Context.Queryable<User>()
+                .Where(s => s.Name == user.Name)
+                .First();
+
+            if (ur == null)
+            {
+                _context.UserDb.Insert(user);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool CheckPassword(string name)
@@ -27,7 +41,10 @@ namespace DragonKing.Database.Service
 
         public User GetUserById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Db.Queryable<User>()
+                            .Where(p => p.Id == id)
+                            .Includes(t => t.Role, s => s.Privileges)
+                            .First();
         }
 
         public User GetUserByName(string name)
@@ -43,12 +60,14 @@ namespace DragonKing.Database.Service
         {
             return _context.UserDb.Context.Queryable<User>()
                 .Includes(t => t.Role, t => t.Privileges)
+                .OrderBy(t => t.Id)
                 .ToList();
         }
 
-        public void RemoverUser(User user)
+        public bool RemoverUser(User user)
         {
-            throw new NotImplementedException();
+            return _context.UserDb.Context.Deleteable(user)
+                .ExecuteCommand() > 0;
         }
 
         public bool UpdatePassword(User user, string strPassword, bool isReset)
@@ -58,11 +77,11 @@ namespace DragonKing.Database.Service
 
         public bool UpdateUser(User user)
         {
+
             return _context.UserDb.Context.UpdateNav(user)
                 .Include(s => s.Role)
                 .ThenInclude(s => s.Privileges)
                 .ExecuteCommand();
-
         }
 
         public bool UpdateUser()
