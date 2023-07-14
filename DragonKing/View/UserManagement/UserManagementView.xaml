@@ -12,21 +12,24 @@
     <Border>
         <TabControl Style="{StaticResource SubMenuTabControlStyle}">
             <TabItem Header="用户列表" Style="{StaticResource SubMenuTabItemStyle}">
-                <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
                     <DataGrid
-                        
                         Margin="20"
                         AutoGenerateColumns="False"
                         Background="Transparent"
                         BorderThickness="0"
                         CanUserAddRows="False"
                         CanUserSortColumns="False"
+                        CellStyle="{StaticResource cellstyle}"
                         FrozenColumnCount="4"
                         ItemsSource="{Binding UserList, IsAsync=True}"
                         RowHeaderWidth="60"
                         SelectedItem="{Binding SelectedUser}"
-                        Style="{StaticResource dgstyle}"
-                        CellStyle="{StaticResource cellstyle}">
+                        Style="{StaticResource dgstyle}">
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="*"
@@ -60,31 +63,36 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <StackPanel Margin="20">
-                        <Button
-                            Margin="10,0,0,10"
-                            Content="添加用户"
-                            Command="{Binding AddUserCommand}"
-                            Style="{StaticResource MainButtonStyle}" />
-                    </StackPanel>
-                </WrapPanel>
+
+                    <Button
+                        Grid.Row="1"
+                        Margin="10,0,0,10"
+                        HorizontalAlignment="Left"
+                        Command="{Binding AddUserCommand}"
+                        Content="添加用户"
+                        Style="{StaticResource MainButtonStyle}" />
+
+                </Grid>
 
             </TabItem>
             <TabItem Header="角色列表" Style="{StaticResource SubMenuTabItemStyle}">
-                <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
                     <DataGrid
-                        
                         Margin="20"
                         AutoGenerateColumns="False"
                         Background="Transparent"
                         BorderThickness="0"
                         CanUserAddRows="False"
                         CanUserSortColumns="False"
+                        CellStyle="{StaticResource cellstyle}"
                         FrozenColumnCount="4"
                         ItemsSource="{Binding RoleList, IsAsync=True}"
                         SelectedItem="{Binding SelectedRole}"
-                        Style="{StaticResource dgstyle}"
-                        CellStyle="{StaticResource cellstyle}">
+                        Style="{StaticResource dgstyle}">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn
@@ -114,14 +122,16 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <StackPanel Margin="20">
-                        <Button
-                            Margin="10,0,0,10"
-                            Content="添加角色"
-                            Command="{Binding AddRoleCommand}"
-                            Style="{StaticResource MainButtonStyle}" />
-                    </StackPanel>
-                </WrapPanel>
+
+                    <Button
+                        Grid.Row="1"
+                        Margin="10,0,0,10"
+                        HorizontalAlignment="Left"
+                        Command="{Binding AddRoleCommand}"
+                        Content="添加角色"
+                        Style="{StaticResource MainButtonStyle}" />
+
+                </Grid>
             </TabItem>
         </TabControl>
     </Border>

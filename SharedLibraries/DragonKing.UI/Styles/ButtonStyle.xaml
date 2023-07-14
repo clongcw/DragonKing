@@ -73,10 +73,13 @@
         <Setter Property="Margin" Value="5" />
         <Setter Property="Background" Value="Red" />
         <Setter Property="Foreground" Value="{DynamicResource MessageInverseForeground}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="pu:ButtonHelper.CornerRadius" Value="5" />
     </Style>
 
-    <Style x:Key="MainButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="MainButtonStyle" TargetType="Button" 
+           BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}">
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -99,6 +102,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         x:Name="Chrome"
+                        CornerRadius="5"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         SnapsToDevicePixels="True">
