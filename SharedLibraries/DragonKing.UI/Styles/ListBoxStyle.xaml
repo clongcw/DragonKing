@@ -13,14 +13,17 @@
         x:Key="MainMenuListBoxItemStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.ListBoxItemStyle}}"
         TargetType="ListBoxItem">
-        <Setter Property="FontSize" Value="22" />
-        <Setter Property="Margin" Value="10" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Margin" Value="0 0 0 10" />
         <Setter Property="Padding" Value="10" />
-        <Setter Property="Width" Value="120" />
-        <Setter Property="Height" Value="120" />
+        <Setter Property="Width" Value="140" />
+        <Setter Property="Height" Value="100" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Foreground" Value="Wheat" />
+                <Setter Property="Foreground" Value="Black" />
                 <Setter Property="FontWeight" Value="SemiBold" />
             </Trigger>
         </Style.Triggers>
@@ -62,23 +65,20 @@
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="pu:ListBoxHelper.ItemsWidth" Value="30" />
-        <Setter Property="pu:ListBoxHelper.ItemsHeight" Value="30" />
         <Setter Property="pu:ListBoxHelper.ItemsCornerRadius" Value="5" />
-        <Setter Property="pu:ListBoxHelper.ItemsSelectedBackground" Value="{DynamicResource ThemeBrush}" />
-        <Setter Property="pu:ListBoxHelper.ItemsSelectedForeground" Value="{DynamicResource MessageInverseForeground}" />
+        <Setter Property="pu:ListBoxHelper.ItemsSelectedBackground" Value="#00BAFF" />
+        <Setter Property="pu:ListBoxHelper.ItemsHoverBackground" Value="Orange" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
-
     </Style>
 </ResourceDictionary>

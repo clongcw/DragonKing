@@ -6,5 +6,7 @@
         <ResourceDictionary Source="/DragonKing.UI;component/Styles/ButtonStyle.xaml" />
         <ResourceDictionary Source="/DragonKing.UI;component/Styles/DataGridStyle.xaml" />
         <ResourceDictionary Source="/DragonKing.UI;component/Styles/ListBoxStyle.xaml" />
+        <ResourceDictionary Source="/DragonKing.UI;component/Styles/TabControlStyle.xaml" />
+        <ResourceDictionary Source="/DragonKing.UI;component/Styles/TabItemStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

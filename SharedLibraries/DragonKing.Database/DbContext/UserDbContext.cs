@@ -1,5 +1,6 @@
 ﻿using DragonKing.Database.Constants;
 using DragonKing.Database.EntityModel;
+using DragonKing.Log.Interface;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,12 @@ namespace DragonKing.Database.DbContext
 {
     public class UserDbContext
     {
+        private readonly ILog _log;
+
         public SqlSugarScope Db;
-        public UserDbContext()
+        public UserDbContext(ILog log)
         {
+            _log = log;
             Db = new SqlSugarScope(new ConnectionConfig()
             {
                 ConnectionString = Environments.UserConnectionString,
@@ -21,7 +25,7 @@ namespace DragonKing.Database.DbContext
                 {
                     OnLogExecuting = (sql, p) =>
                     {
-                        Console.WriteLine(sql);
+                        _log.Debug(sql);
                     }
                 }
             });
@@ -29,7 +33,7 @@ namespace DragonKing.Database.DbContext
             Db.DbMaintenance.CreateDatabase();
             Db.CodeFirst.InitTables<Role, User, Privilege>();
 
-            /*RoleDb.Insert(new Role()
+            /*Role role = new Role()
             {
                 Id = 1,
                 RoleName = "管理员",
@@ -39,16 +43,12 @@ namespace DragonKing.Database.DbContext
                     new Privilege() { Id = 2, Name = "Report", RoleId = 1 },
                     new Privilege() { Id = 3, Name = "Setting", RoleId = 1 }
                 }
-            });
-
-
-            Privilege[] privileges = new Privilege[]
-            {
-                    new Privilege() { Id = 1, Name = "Lis", RoleId = 1 },
-                    new Privilege() { Id = 2, Name = "Report", RoleId = 1 },
-                    new Privilege() { Id = 3, Name = "Setting", RoleId = 1 }
             };
-            PrivilegeDb.InsertRange(privileges);
+
+            RoleDb.Context.InsertNav(role)
+                .Include(z => z.Privileges)
+                 .ExecuteCommand();
+
 
             UserDb.Insert(new User
             {

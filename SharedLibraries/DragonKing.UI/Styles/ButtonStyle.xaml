@@ -30,13 +30,13 @@
     </Style>
 
     <Style
-        x:Key="CaccelButtonStyle"
+        x:Key="CancelButtonStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}"
         TargetType="Button">
         <Setter Property="Height" Value="35" />
         <Setter Property="Width" Value="60" />
-        <Setter Property="Background" Value="PapayaWhip" />
-        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Background" Value="#34C9A5" />
+        <Setter Property="Foreground" Value="{DynamicResource MessageInverseForeground}" />
         <Setter Property="pu:ButtonHelper.CornerRadius" Value="5" />
     </Style>
 

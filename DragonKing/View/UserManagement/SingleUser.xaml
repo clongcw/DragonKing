@@ -48,8 +48,8 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock
@@ -88,7 +88,7 @@
                     <Button
                         Margin="2"
                         Click="Close_Click"
-                        Style="{StaticResource CaccelButtonStyle}"
+                        Style="{StaticResource CancelButtonStyle}"
                         Content="取消" />
                     <Button
                         Margin="2"

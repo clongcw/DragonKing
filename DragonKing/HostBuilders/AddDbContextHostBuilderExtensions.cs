@@ -1,4 +1,6 @@
 ﻿using DragonKing.Database.DbContext;
+using DragonKing.Log.Interface;
+using DragonKing.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -10,7 +12,7 @@ namespace DragonKing.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                services.AddSingleton<UserDbContext>();
+                services.AddSingleton<UserDbContext>(s => new UserDbContext(s.GetRequiredService<ILog>()));
 
             });
 
