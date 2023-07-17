@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
     Width="500"
-    Height="230"
+    Height="270"
     pu:WindowXCaption.Height="0"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -49,50 +49,58 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition  Width="4*"/>
-                    <ColumnDefinition  Width="6*"/>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="6*" />
                 </Grid.ColumnDefinitions>
 
 
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
+                    Style="{StaticResource UserRoleBlockStyle}"
                     Text="角色名称" />
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
+                    Style="{StaticResource UserRoleTextBoxStyle}"
                     Text="{Binding RoleName}" />
 
 
                 <TextBlock
                     Grid.Row="2"
                     Grid.Column="0"
+                    Style="{StaticResource UserRoleBlockStyle}"
                     Text="Lis设置" />
                 <ComboBox
                     x:Name="visuallist"
                     Grid.Row="2"
                     Grid.Column="1"
-                    SelectedValue="{Binding Privileges[0].Visiual, Converter={cv:CNToENVisualConverter}}" />
+                    SelectedValue="{Binding Privileges[0].Visiual, Converter={cv:CNToENVisualConverter}}"
+                    Style="{StaticResource UserRoleComboBoxStyle}" />
 
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="0"
+                    Style="{StaticResource UserRoleBlockStyle}"
                     Text="报告设置" />
                 <ComboBox
                     x:Name="sunFunvisuallist"
                     Grid.Row="3"
                     Grid.Column="1"
-                    SelectedValue="{Binding Privileges[1].Visiual, Converter={cv:CNToENVisualConverter}}" />
+                    SelectedValue="{Binding Privileges[1].Visiual, Converter={cv:CNToENVisualConverter}}"
+                    Style="{StaticResource UserRoleComboBoxStyle}" />
 
                 <TextBlock
                     Grid.Row="4"
                     Grid.Column="0"
+                    Style="{StaticResource UserRoleBlockStyle}"
                     Text="用户设置" />
                 <ComboBox
                     x:Name="visuallistbutton"
                     Grid.Row="4"
                     Grid.Column="1"
-                    SelectedValue="{Binding Privileges[2].Visiual, Converter={cv:CNToENVisualConverter}}" />
+                    SelectedValue="{Binding Privileges[2].Visiual, Converter={cv:CNToENVisualConverter}}"
+                    Style="{StaticResource UserRoleComboBoxStyle}" />
                 <WrapPanel
                     Grid.Row="5"
                     Grid.ColumnSpan="2"
@@ -100,13 +108,13 @@
                     <Button
                         Margin="2"
                         Click="Close_Click"
-                        Style="{StaticResource CancelButtonStyle}"
-                        Content="取消" />
+                        Content="取消"
+                        Style="{StaticResource CancelButtonStyle}" />
                     <Button
                         Margin="2"
                         Click="Confirme_Click"
-                        Style="{StaticResource ConfirmButtonStyle}"
-                        Content="确认" />
+                        Content="确认"
+                        Style="{StaticResource ConfirmButtonStyle}" />
 
                 </WrapPanel>
 

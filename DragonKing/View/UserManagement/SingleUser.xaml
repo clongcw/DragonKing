@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
     Width="500"
-    Height="230"
+    Height="250"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
    pu:WindowXCaption.Height="0"
@@ -55,28 +55,34 @@
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
+                    Style="{StaticResource UserRoleBlockStyle}"
                     Text="用户名称" />
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
+                    Style="{StaticResource UserRoleTextBoxStyle}"
                     Text="{Binding Name}" />
 
                 <TextBlock
                     Grid.Row="2"
                     Grid.Column="0"
+                    Style="{StaticResource UserRoleBlockStyle}"
                     Text="用户密码" />
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="1"
+                    Style="{StaticResource UserRoleTextBoxStyle}"
                     Text="{Binding Password}" />
 
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="0"
+                    Style="{StaticResource UserRoleBlockStyle}"
                     Text="角色" />
                 <ComboBox
                     Grid.Row="3"
                     Grid.Column="1"
+                    Style="{StaticResource UserRoleComboBoxStyle}"
                     ItemsSource="{Binding RoleNames}"
                     SelectedValue="{Binding Role.RoleName}" />
 

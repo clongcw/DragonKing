@@ -64,6 +64,7 @@
         <Setter Property="pu:ButtonHelper.CornerRadius" Value="5" />
     </Style>
 
+
     <Style
         x:Key="DeleteButtonStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}"
