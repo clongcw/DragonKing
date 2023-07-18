@@ -21,12 +21,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </pu:WindowX.Resources>
-    <pu:WindowX.BorderBrush>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#6CBCEA" />
-            <GradientStop Offset="1" Color="#005869" />
-        </LinearGradientBrush>
-    </pu:WindowX.BorderBrush>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

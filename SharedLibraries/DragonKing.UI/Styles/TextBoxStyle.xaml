@@ -8,6 +8,21 @@
         <pucore:SharedResourceDictionary Source="/Panuon.WPF.UI;component/Styles/TextBoxStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="StandardTextBoxStyle"
+           TargetType="TextBox"
+           BasedOn="{StaticResource {x:Static purs:StyleKeys.TextBoxStyle}}">
+        <Setter Property="Padding"
+                Value="10,0,0,0" />
+        <Setter Property="Height"
+                Value="35" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource InputBorderBrush}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="pu:TextBoxHelper.CornerRadius"
+                Value="5" />
+    </Style>
+    
     <Style
         x:Key="UserRoleTextBoxStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.TextBoxStyle}}"

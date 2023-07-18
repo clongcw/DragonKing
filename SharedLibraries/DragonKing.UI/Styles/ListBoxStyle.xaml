@@ -33,6 +33,7 @@
         x:Key="MainMenuListBoxStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.ListBoxStyle}}"
         TargetType="ListBox">
+        
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background">
             <Setter.Value>
@@ -66,7 +67,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Margin" Value="-1" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />

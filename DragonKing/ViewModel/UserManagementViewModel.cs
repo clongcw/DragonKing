@@ -64,7 +64,7 @@ namespace DragonKing.ViewModel
 
         private void GetAllRoles()
         {
-            if (_userService != null)
+            if (_roleService != null)
             {
                 RoleList.Clear();
                 var query = _roleService.GetRoles();
