@@ -53,8 +53,8 @@
                     Mode="DateMinute"
                     SelectedDateTime="{Binding EndTime}"
                     TextStringFormat="yyyy/MM/dd hh:mm:ss" />
-                <Button Content="筛选" Style="{StaticResource ResultButtonStyle}"/>
-                <Button Content="清除" Style="{StaticResource ResultButtonStyle}"/>
+                <Button Content="筛选" Style="{StaticResource ResultButtonStyle}" />
+                <Button Content="清除" Style="{StaticResource ResultButtonStyle}" />
             </WrapPanel>
         </Border>
 
@@ -65,60 +65,83 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <DataGrid
-                        Margin="20"
-                        AutoGenerateColumns="False"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        CanUserAddRows="False"
-                        CanUserSortColumns="False"
-                        CellStyle="{StaticResource cellstyle}"
-                        FrozenColumnCount="4"
-                        ItemsSource="{Binding UserList, IsAsync=True}"
-                        RowHeaderWidth="60"
-                        SelectedItem="{Binding SelectedUser}"
-                        Style="{StaticResource dgstyle}">
+                    Margin="20"
+                    AutoGenerateColumns="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    CanUserAddRows="False"
+                    CanUserSortColumns="False"
+                    CellStyle="{StaticResource cellstyle}"
+                    FrozenColumnCount="4"
+                    ItemsSource="{Binding UserList, IsAsync=True}"
+                    RowHeaderWidth="60"
+                    SelectedItem="{Binding SelectedUser}"
+                    Style="{StaticResource dgstyle}">
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Name}"
-                                CanUserSort="False"
-                                Header="实验名称"
-                                IsReadOnly="True" />
+                            Width="*"
+                            Binding="{Binding Name}"
+                            CanUserSort="False"
+                            Header="实验名称"
+                            IsReadOnly="True" />
                         <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="项目"
-                                IsReadOnly="True" />
+                            Width="*"
+                            Binding="{Binding .}"
+                            CanUserSort="False"
+                            Header="项目"
+                            IsReadOnly="True" />
                         <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="样本编号"
-                                IsReadOnly="True" />
+                            Width="*"
+                            Binding="{Binding .}"
+                            CanUserSort="False"
+                            Header="样本编号"
+                            IsReadOnly="True" />
                         <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="通道"
-                                IsReadOnly="True" />
-                        
-                        
-                        
-                        <DataGridTemplateColumn Width="1*" Header="权限">
+                            Width="*"
+                            Binding="{Binding .}"
+                            CanUserSort="False"
+                            Header="通道"
+                            IsReadOnly="True" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding .}"
+                            CanUserSort="False"
+                            Header="样本类型"
+                            IsReadOnly="True" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding .}"
+                            CanUserSort="False"
+                            Header="检测时间"
+                            IsReadOnly="True" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding .}"
+                            CanUserSort="False"
+                            Header="结果"
+                            IsReadOnly="True" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding .}"
+                            CanUserSort="False"
+                            Header="操作者"
+                            IsReadOnly="True" />
+                        <DataGridTemplateColumn Width="1*" Header="操作">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                                         <Button
-                                                x:Name="Delete"
-                                                Command="{Binding DeleteUserCommand}"
-                                                Content="删除"
-                                                Style="{StaticResource DeleteButtonStyle}" />
+                                            Command="{Binding DeleteUserCommand}"
+                                            Content="删除"
+                                            Style="{StaticResource DeleteButtonStyle}" />
                                         <Button
-                                                x:Name="Property"
-                                                Command="{Binding UpdateUserCommand}"
-                                                Content="属性"
-                                                Style="{StaticResource PropertyButtonStyle}" />
+                                            Command="{Binding UpdateUserCommand}"
+                                            Content="属性"
+                                            Style="{StaticResource PropertyButtonStyle}" />
+                                        <Button
+                                            Command="{Binding UpdateUserCommand}"
+                                            Content="属性"
+                                            Style="{StaticResource PropertyButtonStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
