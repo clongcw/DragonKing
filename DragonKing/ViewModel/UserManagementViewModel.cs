@@ -116,7 +116,14 @@ namespace DragonKing.ViewModel
             {
                 SelectedUser = _userService.GetUserByName(SelectedUser.Name);
                 SelectedUser.RoleNames = RoleNames;
+
+                if (SelectedUser.Role == null)
+                {
+                    SelectedUser.Role = new Role();
+                    SelectedUser.Role.RoleName = "普通用户";
+                }
                 string rolename = SelectedUser.Role.RoleName;
+
                 int roleid = _roleService.GetRoleByRoleName(rolename).Id;
                 SingleUser singleUser = new SingleUser()
                 {
@@ -129,7 +136,6 @@ namespace DragonKing.ViewModel
                     //第一步，先修改用户
                     SelectedUser.RoleId = _roleService.GetRoleByRoleName(SelectedUser.Role.RoleName).Id;
                     SelectedUser.Role = _roleService.GetRoleById(SelectedUser.RoleId);
-                    SelectedUser.Password = SelectedUser.Password;
                     _userService.UpdateUser(SelectedUser);
 
                     //第二步，再修改角色

@@ -5,9 +5,7 @@
     xmlns:pucore="clr-namespace:Panuon.WPF;assembly=Panuon.WPF"
     xmlns:purs="clr-namespace:Panuon.WPF.UI.Resources;assembly=Panuon.WPF.UI">
 
-    <Style
-        x:Key="UserRoleBlockStyle"
-        TargetType="TextBlock">
+    <Style x:Key="UserRoleBlockStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="HorizontalAlignment" Value="Left" />

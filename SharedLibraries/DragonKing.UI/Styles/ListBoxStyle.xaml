@@ -14,7 +14,7 @@
         BasedOn="{StaticResource {x:Static purs:StyleKeys.ListBoxItemStyle}}"
         TargetType="ListBoxItem">
         <Setter Property="FontSize" Value="26" />
-        <Setter Property="Margin" Value="0 0 0 10" />
+        <Setter Property="Margin" Value="0,0,0,10" />
         <Setter Property="Padding" Value="10" />
         <Setter Property="Width" Value="140" />
         <Setter Property="Height" Value="100" />
@@ -33,7 +33,7 @@
         x:Key="MainMenuListBoxStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.ListBoxStyle}}"
         TargetType="ListBox">
-        
+
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background">
             <Setter.Value>
@@ -77,7 +77,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>

@@ -10,6 +10,28 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style
+        x:Key="MenuTabControlStyle"
+        BasedOn="{StaticResource {x:Static purs:StyleKeys.TabControlStyle}}"
+        TargetType="TabControl">
+        <Setter Property="pu:TabControlHelper.HeaderPanelHorizontalAlignment" Value="End" />
+        <Setter Property="pu:TabControlHelper.ItemsHeight" Value="60" />
+        <Setter Property="pu:TabControlHelper.ItemsWidth" Value="140" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="Red" />
+        <Setter Property="pu:TabControlHelper.ItemsHoverBackground" Value="#34C9A5" />
+        <Setter Property="pu:TabControlHelper.ItemsRibbonLineVisibility" Value="Visible" />
+        <Setter Property="pu:TabControlHelper.ItemsRibbonLinePlacement" Value="Bottom" />
+        <Setter Property="pu:TabControlHelper.ItemsRibbonLineBrush" Value="Transparent" />
+        <Setter Property="pu:TabControlHelper.ItemsHoverRibbonLineBrush" Value="#C62F2F" />
+        <Setter Property="pu:TabControlHelper.ItemsHoverRibbonLineThickness" Value="0" />
+        <Setter Property="pu:TabControlHelper.ItemsSelectedRibbonLineBrush" Value="#C62F2F" />
+        <Setter Property="pu:TabControlHelper.ItemsSelectedRibbonLineThickness" Value="2" />
+        <Setter Property="pu:TabControlHelper.ItemsSelectedBackground" Value="LightGreen" />
+        <Setter Property="pu:TabControlHelper.HeaderPanelBorderBrush" Value="LightGray" />
+        <Setter Property="pu:TabControlHelper.HeaderPanelBorderThickness" Value="0 0 0 2" />
+    </Style>
+
+    <Style
         x:Key="SubMenuTabControlStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.TabControlStyle}}"
         TargetType="TabControl">

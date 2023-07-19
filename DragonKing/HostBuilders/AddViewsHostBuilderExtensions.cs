@@ -14,6 +14,8 @@ namespace DragonKing.HostBuilders
                 services.AddSingleton<MainView>();
                 services.AddSingleton<LoginView>();
                 services.AddSingleton<UserManagementView>();
+                services.AddSingleton<SettingsView>();
+                services.AddSingleton<ResultView>();
             });
 
             return host;

@@ -43,7 +43,14 @@
             <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}">
                 <ListBoxItem.Content>
                     <StackPanel>
-                        <TextBlock Text="用户管理" />
+                        <TextBlock Text="结果查询" />
+                    </StackPanel>
+                </ListBoxItem.Content>
+            </ListBoxItem>
+            <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}">
+                <ListBoxItem.Content>
+                    <StackPanel>
+                        <TextBlock Text="设置" />
                     </StackPanel>
                 </ListBoxItem.Content>
             </ListBoxItem>
@@ -62,6 +69,7 @@
 
         <ContentControl
             Grid.Row="1"
+            Margin="10"
             BorderThickness="0"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"

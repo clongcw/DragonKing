@@ -68,8 +68,11 @@ namespace DragonKing.ViewModel
                 case "主页":
                     Content = App.Current._host.Services.GetService<UserManagementView>();
                     break;
-                case "用户管理":
-                    Content = App.Current._host.Services.GetService<UserManagementView>();
+                case "结果查询":
+                    Content = App.Current._host.Services.GetService<ResultView>();
+                    break;
+                case "设置":
+                    Content = App.Current._host.Services.GetService<SettingsView>();
                     break;
                 default:
                     break;

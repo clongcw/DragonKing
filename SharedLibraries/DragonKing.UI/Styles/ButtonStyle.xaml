@@ -79,8 +79,10 @@
         <Setter Property="pu:ButtonHelper.CornerRadius" Value="5" />
     </Style>
 
-    <Style x:Key="MainButtonStyle" TargetType="Button" 
-           BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}">
+    <Style
+        x:Key="MainButtonStyle"
+        BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}"
+        TargetType="Button">
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -103,9 +105,9 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         x:Name="Chrome"
-                        CornerRadius="5"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
+                        CornerRadius="5"
                         SnapsToDevicePixels="True">
                         <ContentPresenter
                             Margin="{TemplateBinding Padding}"
@@ -121,6 +123,20 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style
+        x:Key="ResultButtonStyle"
+        BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}"
+        TargetType="Button">
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Width" Value="120" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Background" Value="#37aefe" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="pu:ButtonHelper.CornerRadius" Value="5" />
+    </Style>
+
 
 
 
