@@ -8,18 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Model\**" />
-    <EmbeddedResource Remove="Model\**" />
-    <None Remove="Model\**" />
-    <Page Remove="Model\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-    <PackageReference Include="Panuon.WPF.UI" Version="1.1.14.3" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.15.1" />
   </ItemGroup>
 
   <ItemGroup>

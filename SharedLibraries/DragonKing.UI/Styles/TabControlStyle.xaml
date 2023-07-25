@@ -13,7 +13,7 @@
         x:Key="MenuTabControlStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.TabControlStyle}}"
         TargetType="TabControl">
-        <Setter Property="pu:TabControlHelper.HeaderPanelHorizontalAlignment" Value="End" />
+        <Setter Property="pu:TabControlHelper.HeaderPanelAlignment" Value="End" />
         <Setter Property="pu:TabControlHelper.ItemsHeight" Value="60" />
         <Setter Property="pu:TabControlHelper.ItemsWidth" Value="140" />
         <Setter Property="BorderThickness" Value="0" />
@@ -35,7 +35,7 @@
         x:Key="SubMenuTabControlStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.TabControlStyle}}"
         TargetType="TabControl">
-        <Setter Property="pu:TabControlHelper.HeaderPanelHorizontalAlignment" Value="Front" />
+        <Setter Property="pu:TabControlHelper.HeaderPanelAlignment" Value="Front" />
         <Setter Property="pu:TabControlHelper.ItemsHeight" Value="60" />
         <Setter Property="pu:TabControlHelper.ItemsWidth" Value="140" />
         <Setter Property="BorderThickness" Value="0" />

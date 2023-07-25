@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:DragonKing.View.UserManagement"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
+    FontFamily="微软雅黑"
     Width="500"
     Height="270"
     pu:WindowXCaption.Height="0"

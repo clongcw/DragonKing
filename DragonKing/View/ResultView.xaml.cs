@@ -28,5 +28,6 @@ namespace DragonKing.View
             this.DataContext = App.Current._host.Services.GetService<ResultViewModel>();
 
         }
+
     }
 }

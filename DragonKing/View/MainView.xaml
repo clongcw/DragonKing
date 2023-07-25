@@ -5,22 +5,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:DragonKing.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
     Title="MainView"
     Width="1366"
     Height="768"
-    WindowState="Maximized"
-    WindowStartupLocation="CenterScreen"
     pu:WindowXCaption.Height="0"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
     mc:Ignorable="d">
-    <pu:WindowX.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Panuon.WPF.UI;component/Control.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </pu:WindowX.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -57,22 +52,31 @@
         </ListBox>
 
         <Button
-            Margin="0 0 5 10"
+            Width="55"
+            Height="55"
+            Margin="0,0,25,10"
+            Padding="1"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            FontSize="50"
-            FontWeight="SemiBold"
-            Foreground="White"
             Background="{x:Null}"
-            Content="×" 
-            Click="Close"/>
+            Click="Close"
+            BorderThickness="0"
+            FontWeight="SemiBold"
+            Foreground="White">
+            <Button.Content>
+                <materialDesign:PackIcon
+                    Width="45"
+                    Height="45"
+                    Kind="CloseOutline" />
+            </Button.Content>
+        </Button>
 
         <ContentControl
             Grid.Row="1"
             Margin="10"
-            BorderThickness="0"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
+            BorderThickness="0"
             Content="{Binding Content}" />
 
 
