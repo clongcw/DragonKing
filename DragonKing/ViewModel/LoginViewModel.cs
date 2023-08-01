@@ -3,14 +3,17 @@ using CommunityToolkit.Mvvm.Input;
 using DragonKing.Database.EntityModel;
 using DragonKing.Database.Interface;
 using DragonKing.Log.Interface;
+using DragonKing.UI.Utils;
 using DragonKing.Utils;
 using DragonKing.View;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace DragonKing.ViewModel
 {
@@ -76,8 +79,6 @@ namespace DragonKing.ViewModel
         {
             User user = _userService.GetUserByName(Username);
 
-
-
             if (user != null && user.Password == Password)
             {
                 #region 记住登录信息
@@ -92,6 +93,41 @@ namespace DragonKing.ViewModel
 
                 var mainView = App.Current._host.Services.GetRequiredService<MainView>();
                 mainView.DataContext = App.Current._host.Services.GetRequiredService<MainViewModel>();
+                /*mainView.Loaded += ((s, e) =>
+                {
+                    try
+                    {
+                        double screenscale = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / SystemParameters.PrimaryScreenWidth;
+
+                        // 获取窗体中的所有控件
+                        IEnumerable<FrameworkElement> controls = WPFUtil.GetChildControls(mainView);
+
+                        foreach (FrameworkElement control in controls)
+                        {
+                            *//*// 排除不需要缩放的控件类型，例如 Label 等
+                            if (!(control is Button) && !(control is TextBox) && !(control is ComboBox))
+                            {
+                                continue;
+                            }*//*
+
+                            // 将控件的宽度和高度缩放
+                            control.Width /= screenscale;
+                            control.Height /= screenscale;
+
+                            // 如果是字体大小可以缩放的控件，也可以进行缩放
+                            if (control is Control controlWithFont)
+                            {
+                                controlWithFont.FontSize /= screenscale;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // 错误处理：在控制台输出错误信息
+                        Console.WriteLine($"Error while scaling controls: {ex.Message}");
+                    }
+                });*/
+
                 mainView!.Show();
 
                 App.Current._host.Services.GetRequiredService<LoginView>().Close();

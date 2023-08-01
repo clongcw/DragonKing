@@ -66,7 +66,7 @@ namespace DragonKing.ViewModel
             switch (viewname)
             {
                 case "主页":
-                    Content = App.Current._host.Services.GetService<UserManagementView>();
+                    Content = App.Current._host.Services.GetService<Test>();
                     break;
                 case "结果查询":
                     Content = App.Current._host.Services.GetService<ResultView>();

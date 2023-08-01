@@ -12,7 +12,7 @@ namespace DragonKing.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                services.AddSingleton<UserDbContext>(s => new UserDbContext(s.GetRequiredService<ILog>()));
+                services.AddSingleton(s => new UserDbContext(s.GetRequiredService<ILog>()));
 
             });
 

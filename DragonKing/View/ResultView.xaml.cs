@@ -1,4 +1,5 @@
-﻿using DragonKing.ViewModel;
+﻿using DragonKing.UI.Utils;
+using DragonKing.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,5 @@ namespace DragonKing.View
             this.DataContext = App.Current._host.Services.GetService<ResultViewModel>();
 
         }
-
     }
 }
