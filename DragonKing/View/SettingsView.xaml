@@ -9,10 +9,8 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <materialDesign:Card>
-        <TabControl
-            materialDesign:ColorZoneAssist.Mode="SecondaryLight"
-            Style="{StaticResource MaterialDesignFilledTabControl}">
+    <Grid>
+        <TabControl materialDesign:ColorZoneAssist.Mode="SecondaryLight" Style="{StaticResource MaterialDesignFilledTabControl}">
             <TabItem>
                 <TabItem.Header>
                     <TextBlock
@@ -29,9 +27,9 @@
                         FontWeight="Bold"
                         Text="报告设置" />
                 </TabItem.Header>
-                
+
             </TabItem>
         </TabControl>
 
-    </materialDesign:Card>
+    </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using DragonKing.Log.Interface;
 using Serilog;
+using Serilog.Core;
 using Serilog.Events;
 using System;
 
@@ -64,6 +65,21 @@ namespace DragonKing.Log.Service
 
         #endregion
 
+        #region Properties
+
+        public static LogService Instance
+        {
+            get
+            {
+                if (_instance == null) _instance = new LogService();
+
+                return _instance;
+            }
+        }
+
+        private static LogService? _instance;
+
+        #endregion
 
         #region Methods
 

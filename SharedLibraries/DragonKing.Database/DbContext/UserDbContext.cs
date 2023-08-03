@@ -25,7 +25,7 @@ namespace DragonKing.Database.DbContext
                 {
                     OnLogExecuting = (sql, p) =>
                     {
-                        _log.Debug(sql);
+                        //_log.Debug(sql);
                     }
                 }
             });

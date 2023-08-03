@@ -24,7 +24,7 @@ namespace DragonKing.ViewModel
         [ObservableProperty]
         private double _TotalPages = 0;
 
-        public const double PageSize = 5;
+        public const double PageSize = 10;
         #endregion
 
         public ResultViewModel()

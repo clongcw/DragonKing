@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
+	<PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharedLibraries\DragonKing.Communication\DragonKing.Communication.csproj" />
     <ProjectReference Include="..\SharedLibraries\DragonKing.Database\DragonKing.Database.csproj" />
     <ProjectReference Include="..\SharedLibraries\DragonKing.Log\DragonKing.Log.csproj" />
     <ProjectReference Include="..\SharedLibraries\DragonKing.UI\DragonKing.UI.csproj" />

@@ -8,15 +8,14 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pu="clr-namespace:Panuon.WPF.UI;assembly=Panuon.WPF.UI"
-    Width="1800"
-    Height="850"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="4*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <Border>
+        <Grid>
             <WrapPanel>
                 <TextBox
                     pu:TextBoxHelper.Watermark="实验名称"
@@ -57,121 +56,123 @@
                 <Button Content="筛选" Style="{StaticResource ResultButtonStyle}" />
                 <Button Content="清除" Style="{StaticResource ResultButtonStyle}" />
             </WrapPanel>
-        </Border>
-        <Border Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <DataGrid
-                        Margin="20"
-                        AutoGenerateColumns="False"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        CanUserAddRows="False"
-                        CanUserSortColumns="False"
-                        CellStyle="{StaticResource cellstyle}"
-                        FrozenColumnCount="4"
-                        ItemsSource="{Binding RecordListDisplay, IsAsync=True}"
-                        RowHeaderWidth="60"
-                        Style="{StaticResource dgstyle}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Id}"
-                                CanUserSort="False"
-                                Header="实验名称"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="项目"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="样本编号"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="通道"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="样本类型"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="检测时间"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="结果"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding .}"
-                                CanUserSort="False"
-                                Header="操作者"
-                                IsReadOnly="True" />
-                            <DataGridTemplateColumn Width="1*" Header="操作">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                                            <Button
-                                                Command="{Binding DeleteUserCommand}"
-                                                Content="删除"
-                                                Style="{StaticResource DeleteButtonStyle}" />
-                                            <Button
-                                                Command="{Binding UpdateUserCommand}"
-                                                Content="属性"
-                                                Style="{StaticResource PropertyButtonStyle}" />
-                                            <Button
-                                                Command="{Binding UpdateUserCommand}"
-                                                Content="属性"
-                                                Style="{StaticResource PropertyButtonStyle}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <pu:Pagination
-                        Height="40"
-                        HorizontalAlignment="Right"
-                        CurrentPage="{Binding CurrentPage}"
-                        FontSize="16"
-                        ItemsWidth="40"
-                        MaxPage="{Binding TotalPages}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="CurrentPageChanged">
-                                <i:InvokeCommandAction Command="{Binding GoToPageCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </pu:Pagination>
-                    <WrapPanel>
-                        <TextBox
-                            x:Name="page"
-                            Width="60"
-                            pu:TextBoxHelper.Watermark="Page"
-                            Text="{Binding CurrentPage}" />
-                        <Button Command="{Binding GoToPageCommand}" Content="Go" />
-                        
-                    </WrapPanel>
-                </StackPanel>
+        </Grid>
 
-            </Grid>
-        </Border>
+        <DataGrid
+            Grid.Row="1"
+            Margin="20"
+            
+            AutoGenerateColumns="False"
+            Background="Transparent"
+            BorderThickness="0"
+            CanUserAddRows="False"
+            CanUserSortColumns="False"
+            CellStyle="{StaticResource cellstyle}"
+            FrozenColumnCount="4"
+            ItemsSource="{Binding RecordListDisplay, IsAsync=True}"
+            RowHeaderWidth="60"
+            Style="{StaticResource MaterialDesignDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Id}"
+                    CanUserSort="False"
+                    Header="实验名称"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding .}"
+                    CanUserSort="False"
+                    Header="项目"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding .}"
+                    CanUserSort="False"
+                    Header="样本编号"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding .}"
+                    CanUserSort="False"
+                    Header="通道"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding .}"
+                    CanUserSort="False"
+                    Header="样本类型"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding .}"
+                    CanUserSort="False"
+                    Header="检测时间"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding .}"
+                    CanUserSort="False"
+                    Header="结果"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding .}"
+                    CanUserSort="False"
+                    Header="操作者"
+                    IsReadOnly="True" />
+                <DataGridTemplateColumn Width="2*" Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                <Button
+                                    Command="{Binding DeleteUserCommand}"
+                                    Content="删除"
+                                    Style="{StaticResource DeleteButtonStyle}" />
+                                <Button
+                                    Command="{Binding UpdateUserCommand}"
+                                    Content="属性"
+                                    Style="{StaticResource PropertyButtonStyle}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Right">
+            <pu:Pagination
+                Grid.Column="0"
+                Height="40"
+                CurrentPage="{Binding CurrentPage}"
+                FontSize="16"
+                ItemsWidth="40"
+                MaxPage="{Binding TotalPages}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="CurrentPageChanged">
+                        <i:InvokeCommandAction Command="{Binding GoToPageCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </pu:Pagination>
+            <TextBox
+                Grid.Column="1"
+                Width="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                pu:TextBoxHelper.Watermark="Page"
+                Text="{Binding CurrentPage}" />
+            <Button
+                Grid.Column="2"
+                Command="{Binding GoToPageCommand}"
+                Content="Go" />
+        </WrapPanel>
+
+
+
+
+
+
     </Grid>
 </UserControl>
