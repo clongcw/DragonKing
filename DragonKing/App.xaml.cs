@@ -24,6 +24,8 @@ namespace DragonKing
         public App()
         {
             _host = CreateHostBuilder().Build();
+
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjYyMjk1N0AzMjMyMmUzMDJlMzBDN3ovUVFVWlE3cnd0QklDZ1hYUUtoSGlnbStnWE1NTytUUmpWNU5JTDlrPQ==");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args = null)

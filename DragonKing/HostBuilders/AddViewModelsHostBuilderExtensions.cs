@@ -18,6 +18,7 @@ namespace DragonKing.HostBuilders
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<ResultViewModel>();
                 services.AddSingleton<TestViewModel>();
+                services.AddSingleton<OfficeViewModel>();
 
             });
 

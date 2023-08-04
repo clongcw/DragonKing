@@ -71,6 +71,9 @@ namespace DragonKing.ViewModel
                 case "结果查询":
                     Content = App.Current._host.Services.GetService<ResultView>();
                     break;
+                case "Office":
+                    Content = App.Current._host.Services.GetService<OfficeView>();
+                    break;
                 case "设置":
                     Content = App.Current._host.Services.GetService<SettingsView>();
                     break;
