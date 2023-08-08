@@ -157,7 +157,7 @@
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="pu:ButtonHelper.HoverBackground" Value="Red" />
-        
+
 
     </Style>
 

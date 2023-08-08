@@ -9,7 +9,7 @@
     xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
     Syncfusion:SfSkinManager.Theme="{Syncfusion:SkinManagerExtension ThemeName=Metro}"
     mc:Ignorable="d">
-    <Grid x:Name="Root">
+    <!--<Grid x:Name="Root">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -24,5 +24,32 @@
             AcceptsTab="True"
             AllowDrop="True"
             LayoutType="Pages" />
+    </Grid>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Button Content="生成报告" Command="{Binding GenerateReportByTemplateCommand}" Style="{StaticResource MaterialDesignFlatLightBgButton}"/>
+            <Button Content="预览报告" Command="{Binding PreviewReportCommand}" Style="{StaticResource MaterialDesignFlatLightBgButton}"/>
+            <Button Content="打印报告" Command="{Binding PrintCommand}" Style="{StaticResource MaterialDesignFlatLightBgButton}"/>
+            <Button Content="切换报告" Command="{Binding ChangeReportCommand}" Style="{StaticResource MaterialDesignFlatLightBgButton}"/>
+        </StackPanel>
+
+        <DocumentViewer Grid.Row="1"  Document="{Binding Document}">
+            <DocumentViewer.Resources>
+                <!-- Hides the search box-->
+                <Style TargetType="ContentControl">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+
+                <!-- Hides the toolbar -->
+                <Style TargetType="ToolBar">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+            </DocumentViewer.Resources>
+        </DocumentViewer>
     </Grid>
+    
 </UserControl>
