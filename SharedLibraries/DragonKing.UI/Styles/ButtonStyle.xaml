@@ -145,7 +145,6 @@
         x:Key="MainViewCloseButtonStyle"
         BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}"
         TargetType="Button">
-        <Setter Property="pu:ButtonHelper.HoverForeground" Value="Orange" />
         <Setter Property="Height" Value="55" />
         <Setter Property="Width" Value="55" />
         <Setter Property="FontSize" Value="20" />
@@ -154,9 +153,10 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="pu:ButtonHelper.HoverBackground" Value="Red" />
+        <Setter Property="pu:ButtonHelper.HoverBackground" Value="orange" />
+        <Setter Property="pu:ButtonHelper.ClickBackground" Value="Red" />
 
 
     </Style>

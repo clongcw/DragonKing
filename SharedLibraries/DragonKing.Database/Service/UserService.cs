@@ -3,8 +3,6 @@ using DragonKing.Database.EntityModel;
 using DragonKing.Database.Interface;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Xml.Linq;
 
 namespace DragonKing.Database.Service
 {

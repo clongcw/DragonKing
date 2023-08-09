@@ -1,50 +1,26 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Aspose.Cells;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using NPOI.OpenXmlFormats.Wordprocessing;
+using NPOI.XWPF.UserModel;
 using System;
-using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Xps.Packaging;
-using System.Windows.Xps;
 using System.Windows.Documents;
-using System.IO.Packaging;
-using System.Windows.Xps.Serialization;
-using System.Drawing.Printing;
-using Spire.Doc;
-using System.Windows.Controls;
-using System.Windows.Markup;
-using System.Windows;
-using System.Windows.Media;
-using Syncfusion.Windows.Controls.RichTextBoxAdv;
-using Microsoft.Win32;
-using CommunityToolkit.Mvvm.Input;
-using NPOI.XWPF.UserModel;
-using NPOI.OpenXmlFormats.Wordprocessing;
-using NPOI.SS.UserModel;
-using System.Runtime.CompilerServices;
-using static NPOI.XWPF.UserModel.XWPFTable;
-using SqlSugar.Extensions;
-using NPOI.OpenXmlFormats.Spreadsheet;
+using System.Windows.Forms;
+using System.Windows.Xps.Packaging;
 using CT_Border = NPOI.OpenXmlFormats.Wordprocessing.CT_Border;
 using Document = Spire.Doc.Document;
-using System.Windows.Forms;
-using PrintDialog = System.Windows.Forms.PrintDialog;
 using MessageBox = System.Windows.Forms.MessageBox;
-using System.Printing;
-using NPOI.XWPF.Extractor;
-using System.Drawing;
-using System.Reflection.Metadata;
-using DragonKing.View;
-using MaterialDesignThemes.Wpf;
-using System.Xml;
+using PrintDialog = System.Windows.Forms.PrintDialog;
 
 namespace DragonKing.ViewModel
 {
     public partial class OfficeViewModel : ObservableObject
     {
         [ObservableProperty]
-        private object _document;
+        private object? _document;
         public OfficeViewModel()
         {
 
@@ -79,7 +55,7 @@ namespace DragonKing.ViewModel
             }
         }
 
-        
+
 
         [RelayCommand]
         public void PreviewReport()
@@ -95,7 +71,7 @@ namespace DragonKing.ViewModel
             //doc.LoadFromFile(Environment.CurrentDirectory + @"\666.docx");
             //doc.SaveToFile(Environment.CurrentDirectory + @"\666.xps", FileFormat.XPS);
             LoadXpsDocument(Environment.CurrentDirectory + @"\666.xps");
-            
+
             //reportView.DataContext= this;
             //reportView.Show();
         }
@@ -111,15 +87,12 @@ namespace DragonKing.ViewModel
             var InternalLicense = doc.GetType().GetProperty("InternalLicense", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             InternalLicense.SetValue(doc, Lic);
             #endregion
-            doc.LoadFromFile(Environment.CurrentDirectory + @"\Report\20230808\666.docx");
-            doc.SaveToFile(Environment.CurrentDirectory + @"\Report\20230808\666.xps", FileFormat.XPS);
+            //doc.LoadFromFile(Environment.CurrentDirectory + @"\Report\20230808\666.docx");
+            //doc.SaveToFile(Environment.CurrentDirectory + @"\Report\20230808\666.xps", FileFormat.XPS);
 
             LoadXpsDocument(Environment.CurrentDirectory + @"\Report\20230808\666.xps");
-            
-            
-            
-            //reportView.DataContext = this;
-            //reportView.Show();
+
+
         }
 
         [RelayCommand]
@@ -150,18 +123,10 @@ namespace DragonKing.ViewModel
             {
                 XWPFDocument doc = new XWPFDocument(stream);
 
-                //遍历段落
-                foreach (var para in doc.Paragraphs)
-                {
-                    //ReplaceKey(para, "hello");
-                }
-
                 int iRow = 0; //表中行的循环索引
                 int iCell = 0; //表中列的循环索引
                 //遍历表格
                 var tables = doc.Tables;
-                /*foreach (var table in tables[])
-                {*/
                 foreach (XWPFTableRow row in tables[0].Rows)
                 {
                     foreach (XWPFTableCell cell in row.GetTableCells())
@@ -245,7 +210,6 @@ namespace DragonKing.ViewModel
                         }
                     }
                 }
-                /*}*/
 
 
 
@@ -397,8 +361,6 @@ namespace DragonKing.ViewModel
             InternalLicense.SetValue(document, Lic);
             #endregion
 
-
-
             document.LoadFromFile(Environment.CurrentDirectory + @"\Report\20230807\888.docx");
 
             //初始化PrintDialog实例
@@ -418,9 +380,21 @@ namespace DragonKing.ViewModel
             {
                 printDoc.Print();
             }
-
-
         }
 
+
+        [RelayCommand]
+        public void Test()
+        {
+            WorkbookDesigner wb = new WorkbookDesigner(new Workbook());
+            var style = new CellsFactory().CreateStyle();
+            style.Borders.SetColor(System.Drawing.Color.Red);
+            style.Font.Color = System.Drawing.Color.Red;
+            wb.Workbook.Worksheets[0].Cells[0, 0].SetStyle(style);
+            wb.Workbook.Worksheets[0].Cells[0, 0].PutValue("激活检测仅供学习参考！");
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test.xlsx");
+            wb.Workbook.Save(path);
+
+        }
     }
 }

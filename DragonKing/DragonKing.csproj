@@ -35,4 +35,10 @@
     <ProjectReference Include="..\SharedLibraries\DragonKing.UI\DragonKing.UI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\..\..\..\Downloads\Aspose.Hook\Aspose.Hook\v22.7forNET6Crack\Aspose.Cells.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

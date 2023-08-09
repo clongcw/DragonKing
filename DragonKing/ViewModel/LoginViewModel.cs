@@ -3,17 +3,14 @@ using CommunityToolkit.Mvvm.Input;
 using DragonKing.Database.EntityModel;
 using DragonKing.Database.Interface;
 using DragonKing.Log.Interface;
-using DragonKing.UI.Utils;
 using DragonKing.Utils;
 using DragonKing.View;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Panuon.WPF.UI;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace DragonKing.ViewModel
 {

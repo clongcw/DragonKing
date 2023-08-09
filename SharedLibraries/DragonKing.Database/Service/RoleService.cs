@@ -1,7 +1,6 @@
 ﻿using DragonKing.Database.DbContext;
 using DragonKing.Database.EntityModel;
 using DragonKing.Database.Interface;
-using System;
 using System.Collections.Generic;
 
 namespace DragonKing.Database.Service
@@ -20,7 +19,7 @@ namespace DragonKing.Database.Service
             return _context.RoleDb.Context.InsertNav(role)
                  .Include(z => z.Privileges)
                  .ExecuteCommand();
-                
+
         }
 
         public Role GetRoleById(int id)
@@ -52,9 +51,9 @@ namespace DragonKing.Database.Service
 
         public bool RemoverRole(Role role)
         {
-          return  _context.RoleDb.Context.DeleteNav(role)
-                     .Include(z1 => z1.Privileges)
-                     .ExecuteCommand();
+            return _context.RoleDb.Context.DeleteNav(role)
+                       .Include(z1 => z1.Privileges)
+                       .ExecuteCommand();
         }
 
         public bool UpdateRole(Role role)

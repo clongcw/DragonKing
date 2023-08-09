@@ -3,13 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using DragonKing.Communication;
 using DragonKing.Communication.Device;
 using DragonKing.View;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DragonKing.ViewModel
 {

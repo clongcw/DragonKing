@@ -1,6 +1,5 @@
 ﻿using DragonKing.Database.DbContext;
 using DragonKing.Log.Interface;
-using DragonKing.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

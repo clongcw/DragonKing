@@ -1,13 +1,9 @@
 ﻿using DragonKing.Log.Interface;
 using DragonKing.Log.Service;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace DragonKing.Communication.Device
 {
@@ -166,7 +162,7 @@ namespace DragonKing.Communication.Device
             {
                 _log.Warning($"ADP{AdpInfo.NodeId}初始化失败，错误代码{res}");
             }
-            
+
 
             //读取Adp初始压力值，用于判断堵塞
             if (res == ResultCode.S_SUCCESSED)
@@ -302,6 +298,6 @@ namespace DragonKing.Communication.Device
             throw new NotImplementedException();
         }
 
-        
+
     }
 }
