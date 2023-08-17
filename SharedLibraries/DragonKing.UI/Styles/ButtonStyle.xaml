@@ -157,11 +157,39 @@
         <Setter Property="Foreground" Value="White" />
         <Setter Property="pu:ButtonHelper.HoverBackground" Value="orange" />
         <Setter Property="pu:ButtonHelper.ClickBackground" Value="Red" />
+    </Style>
 
-
+    <Style
+        x:Key="ExcelButtonStyle"
+        BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}"
+        TargetType="Button">
+        <Setter Property="Margin" Value="20,0" />
+        <Setter Property="Width" Value="120" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Background" Value="#3C7FF8" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="pu:ButtonHelper.CornerRadius" Value="4" />
+        <Setter Property="pu:ButtonHelper.HoverBackground" Value="#5C96FF" />
+        <Setter Property="pu:ButtonHelper.ClickBackground" Value="#2B70EE" />
     </Style>
 
 
+    <Style
+        x:Key="sssg"
+        BasedOn="{StaticResource {x:Static purs:StyleKeys.ButtonStyle}}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="120" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Padding" Value="10,0,10,0" />
+        <Setter Property="Background" Value="#FFF97901" />
+        <Setter Property="pu:ButtonHelper.HoverBackground" Value="#FFE08410" />
+        <Setter Property="pu:ButtonHelper.ClickBackground" Value="#FFDC5420" />
+        <Setter Property="pu:ButtonHelper.CornerRadius" Value="4,4,4,4" />
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+        <Setter Property="pu:ButtonHelper.ShadowColor" Value="#FFE5E7E5" />
+        <Setter Property="pu:ButtonHelper.HoverShadowColor" Value="#FFE5E6E7" />
+        <Setter Property="pu:ButtonHelper.ClickEffect" Value="Sink" />
+    </Style>
 
 
 

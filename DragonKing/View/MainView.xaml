@@ -22,20 +22,20 @@
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <ListBox Style="{StaticResource SubMenuListBoxStyle}">
+        <ListBox SelectedIndex="2" Style="{StaticResource SubMenuListBoxStyle}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}">
+            <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}" Visibility="{Binding User.Role.Privileges[0].Visiual}">
                 <ListBoxItem.Content>
                     <StackPanel>
                         <TextBlock Text="主页" />
                     </StackPanel>
                 </ListBoxItem.Content>
             </ListBoxItem>
-            <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}">
+            <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}" Visibility="{Binding User.Role.Privileges[0].Visiual}">
                 <ListBoxItem.Content>
                     <StackPanel>
                         <TextBlock Text="结果查询" />
@@ -49,7 +49,7 @@
                     </StackPanel>
                 </ListBoxItem.Content>
             </ListBoxItem>
-            <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}">
+            <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}" Visibility="{Binding User.Role.Privileges[0].Visiual}">
                 <ListBoxItem.Content>
                     <StackPanel>
                         <TextBlock Text="设置" />

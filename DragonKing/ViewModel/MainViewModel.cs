@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DragonKing.Database.EntityModel;
 using DragonKing.Database.Interface;
 using DragonKing.UI.Utils;
 using DragonKing.View;
@@ -26,12 +27,17 @@ namespace DragonKing.ViewModel
         private Stopwatch _stopwatch;
         [ObservableProperty]
         private DispatcherTimer _timer;
+        [ObservableProperty]
+        private User _user;
         #endregion
 
         public MainViewModel(IUserService userService, IRoleService roleService)
         {
             _userService = userService;
             _roleService = roleService;
+
+            Content = App.Current._host.Services.GetService<OfficeView>();
+            User = Const.User;
 
             #region 刷新时间
             _stopwatch = new Stopwatch();

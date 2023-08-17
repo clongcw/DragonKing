@@ -7,12 +7,13 @@
     xmlns:local="clr-namespace:DragonKing.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="DocumentEditorDemo"
+    xmlns:mpp="clr-namespace:MoonPdfLib;assembly=MoonPdfLib"
     Width="1366"
     Height="768"
     WindowStartupLocation="CenterScreen"
     Syncfusion:SfSkinManager.Theme="{Syncfusion:SkinManagerExtension ThemeName=Windows11Light}"
     mc:Ignorable="d">
-    <Grid x:Name="Root">
+    <!--<Grid x:Name="Root">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -27,5 +28,67 @@
             AcceptsTab="True"
             AllowDrop="True"
             LayoutType="Pages" />
+    </Grid>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Background="#f0f0f0">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <Button
+                    Width="50"
+                    Margin="5,5"
+                    Click="FileButton_Click"
+                    Content="文件" />
+
+                <Button
+                    Width="50"
+                    Margin="0,5"
+                    Click="ZoomInButton_Click"
+                    Content="放大" />
+
+                <Button
+                    Width="50"
+                    Margin="5,5"
+                    Click="ZoomOutButton_Click"
+                    Content="缩小" />
+
+                <Button
+                    Width="50"
+                    Margin="0,5"
+                    Click="NormalButton_Click"
+                    Content="100%" />
+
+                <Button
+                    Width="50"
+                    Margin="5,5"
+                    Click="FitToHeightButton_Click"
+                    Content="整页" />
+
+                <Button
+                    Width="50"
+                    Margin="0,5"
+                    Click="SinglePageButton_Click"
+                    Content="单页" />
+
+                <Button
+                    Width="50"
+                    Margin="5,5"
+                    Click="FacingButton_Click"
+                    Content="双页" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="#d3d3d3">
+            <mpp:MoonPdfPanel
+                x:Name="moonPdfPanel"
+                AllowDrop="True"
+                Background="LightGray"
+                PageMargin="0,2,4,2"
+                PageRowDisplay="ContinuousPageRows"
+                ViewType="SinglePage" />
+        </Border>
     </Grid>
 </Syncfusion:RibbonWindow>

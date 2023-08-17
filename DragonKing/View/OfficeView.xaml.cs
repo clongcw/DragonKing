@@ -10,12 +10,13 @@ namespace DragonKing.View
     /// </summary>
     public partial class OfficeView : UserControl
     {
+
+
         public OfficeView()
         {
             InitializeComponent();
             this.DataContext = App.Current._host.Services.GetService<OfficeViewModel>();
-
-
+            docView.FitToWidth();
         }
     }
 }

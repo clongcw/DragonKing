@@ -51,9 +51,12 @@ namespace DragonKing.ViewModel
             if (!File.Exists(wholeName))
             {
                 // 创建文件
-                using (FileStream fs = File.Create(wholeName)) ;
-                User user = _userService.GetUserByName("Admin");
-                JsonUtil.WriteJsonFile(wholeName, JsonConvert.SerializeObject(user));
+                using (FileStream fs = File.Create(wholeName))
+                {
+                    User user = _userService.GetUserByName("Admin");
+                    JsonUtil.WriteJsonFile(wholeName, JsonConvert.SerializeObject(user));
+                }
+
             }
             #endregion
 
@@ -74,6 +77,7 @@ namespace DragonKing.ViewModel
         [RelayCommand]
         public void SignIn()
         {
+
             User user = _userService.GetUserByName(Username);
 
             if (user != null && user.Password == Password)
@@ -81,11 +85,12 @@ namespace DragonKing.ViewModel
                 #region 记住登录信息
                 //将当前的配置序列化为json字符串
                 CurrentUser.Enabled = Enabled;
-                CurrentUser.Enabled = Enabled;
+                CurrentUser.Role = user.Role;
                 CurrentUser.Name = Username;
                 CurrentUser.Password = Password;
                 var content = JsonConvert.SerializeObject(CurrentUser);
                 JsonUtil.WriteJsonFile(Environment.CurrentDirectory + @"\Configuration\user.json", content);
+                Const.User = CurrentUser;
                 #endregion
 
                 var mainView = App.Current._host.Services.GetRequiredService<MainView>();
@@ -111,7 +116,7 @@ namespace DragonKing.ViewModel
                             control.Width /= screenscale;
                             control.Height /= screenscale;
 
-                            // 如果是字体大小可以缩放的控件，也可以进行缩放
+                            // 如果是字体大小可以缩放的控件，也可以进行缩放             
                             if (control is Control controlWithFont)
                             {
                                 controlWithFont.FontSize /= screenscale;

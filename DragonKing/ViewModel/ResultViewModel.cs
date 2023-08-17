@@ -43,7 +43,6 @@ namespace DragonKing.ViewModel
         {
             var p = Convert.ToInt32(CurrentPage);
             RecordListDisplay = new ObservableCollection<RecordListItemModel>(RecordList.Skip((int)(PageSize * (p - 1))).Take((int)PageSize));
-
         }
     }
 }

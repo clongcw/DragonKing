@@ -1,18 +1,30 @@
 ﻿using Aspose.Cells;
+using Aspose.Slides;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DragonKing.Enum;
+using DragonKing.Utils;
+using MiniExcelLibs;
+using MoonPdfLib;
 using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
+using Panuon.WPF.UI;
 using System;
+using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Xps.Packaging;
 using CT_Border = NPOI.OpenXmlFormats.Wordprocessing.CT_Border;
-using Document = Spire.Doc.Document;
+using Document = Aspose.Words.Document;
+using ISlide = Aspose.Slides.ISlide;
 using MessageBox = System.Windows.Forms.MessageBox;
+using Presentation = Aspose.Slides.Presentation;
 using PrintDialog = System.Windows.Forms.PrintDialog;
 
 namespace DragonKing.ViewModel
@@ -21,10 +33,84 @@ namespace DragonKing.ViewModel
     {
         [ObservableProperty]
         private object? _document;
+        [ObservableProperty]
+        private string _excelPath = @"C:\Users\63214\Desktop\副本资金测算_公式.xlsx";
+        [ObservableProperty]
+        private string _templateExcelPath = @"C:\Users\63214\Desktop\模板12.xlsx";
+        [ObservableProperty]
+        private string _tmpPath = Environment.CurrentDirectory + @"\Report\";
+        [ObservableProperty]
+        private string _mergedName = @"C:\Users\63214\Desktop\小工具\ICON输出\merged.xlsx";
+        [ObservableProperty]
+        private string _sheetName = "Sheet2";
+        [ObservableProperty]
+        //纵向选择显示
+        private bool _isControl1Visible = true;
+        [ObservableProperty]
+        //横向选择显示
+        private bool _isControl2Visible = false;
+
+        private Options _options = Options.纵向数据源;
+        public Options Options
+        {
+            get { return _options; }
+            set
+            {
+                _options = value;
+                if (_options == Options.纵向数据源)
+                {
+                    IsControl1Visible = true;
+                    IsControl2Visible = false;
+                }
+                else if (_options == Options.横向数据源)
+                {
+                    IsControl1Visible = false;
+                    IsControl2Visible = true;
+                }
+                else
+                {
+                    IsControl1Visible = false;
+                    IsControl2Visible = false;
+                }
+            }
+        }
+        [ObservableProperty]
+        private TemplateOptions _templateOptions = TemplateOptions.附件12;
+        [ObservableProperty]
+        /// <summary>
+        /// 开始列
+        /// </summary>
+        private string _startColumn = "B";
+        [ObservableProperty]
+        /// <summary>
+        /// 结束列
+        /// </summary>
+        private string _endColumn = "Z";
+        [ObservableProperty]
+        /// <summary>
+        /// 开始行
+        /// </summary>
+        private int _startRow = 3;
+        [ObservableProperty]
+        /// <summary>
+        /// 结束行
+        /// </summary>
+        private int _endRow = 10;
+
+        //生成文件进度
+        private double schedule;
+        public double Schedule
+        {
+            get => schedule;
+            set => schedule = double.Parse(string.Format("{0:f2}", value));
+        }
+
+        public bool? IsEnabled = true;
+
+
+
         public OfficeViewModel()
         {
-
-
             ////创建 Document 类的对象
             //Document doc = new Document();
 
@@ -39,20 +125,394 @@ namespace DragonKing.ViewModel
 
             //GenerateReportByTemplate();
 
+            //PdfPanel = new MoonPdfPanel();
+
         }
+
+        #region Excel
+        [RelayCommand]
+        public void OpenExcel()
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ExcelPath = openFileDialog.FileName;
+            }
+        }
+
+        [RelayCommand]
+        public void OpenTemplateExcel()
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                TemplateExcelPath = openFileDialog.FileName;
+            }
+        }
+
+        [RelayCommand]
+        public void OpenOutputDic()
+        {
+            // 创建 FolderBrowserDialog 对象
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+
+            // 显示选择文件夹对话框并获取结果
+            DialogResult result = folderBrowserDialog.ShowDialog();
+
+            // 处理结果
+            if (result == DialogResult.OK)
+            {
+                // 用户选择了文件夹
+                TmpPath = $"{folderBrowserDialog.SelectedPath}\\";
+                // 执行处理逻辑
+            }
+        }
+
+        [RelayCommand]
+        public void Export()
+        {
+            //配置文件目录
+            string dict = null;
+            //IOUtil.Exists(dict);
+            Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog()
+            {
+                Title = "请选择导出配置文件...",            //对话框标题
+                Filter = "Excel Files(*.xlsx)|*.xlsx",    //文件格式过滤器
+                FilterIndex = 1,                          //默认选中的过滤器
+                FileName = "merged",                      //默认文件名
+                DefaultExt = "xlsx",                      //默认扩展名
+                InitialDirectory = dict,                  //指定初始的目录
+                OverwritePrompt = true,                   //文件已存在警告
+                AddExtension = true,                      //若用户省略扩展名将自动添加扩展名
+            };
+            if (sfd.ShowDialog() == true)
+            {
+                MergedName = sfd.FileName;
+            }
+        }
+
+
+        [RelayCommand]
+        public async Task OutputExcelsWithHorizontal()
+        {
+            List<string> sheetNames = MiniExcel.GetSheetNames(ExcelPath);
+
+            var rows = MiniExcel.Query(ExcelPath, sheetName: SheetName).Cast<IDictionary<string, object>>().ToList();
+            rows = rows.Skip(StartRow - 1).Take(EndRow - StartRow + 1).ToList();
+
+            List<string> newdatas = new List<string>();
+            Dictionary<string, object> value = new Dictionary<string, object>();
+            int count = 0;
+            foreach (var row in rows)
+            {
+                foreach (var item in row)
+                {
+                    if (item.Value != null)
+                    {
+                        newdatas.Add(item.Value.ToString());
+                    }
+                }
+
+                for (int k = 0; k < newdatas.Count; k++)
+                {
+                    string key = "A" + k.ToString();
+                    value.Add(key, newdatas[k]); // null代表暂时没有值
+                }
+                MiniExcel.SaveAsByTemplate(TmpPath + newdatas[0] + ".xlsx", TemplateExcelPath, value);
+                await Task.Delay(10);
+                value.Clear();
+                newdatas.Clear();
+                count++;
+                Schedule = 50d / rows.Count * count;
+            }
+
+        }
+
+
+
+        [RelayCommand]
+        public async Task OutputExcelsWithVertical()
+        {
+            List<string> sheetNames = MiniExcel.GetSheetNames(ExcelPath);
+
+
+            // 读取数据源文件
+            var templateRows = MiniExcel.Query(TemplateExcelPath).ToList();
+            List<string> newdatas = new List<string>();
+            Dictionary<string, object> value = new Dictionary<string, object>();
+            /*foreach (string sheetName in sheetNames)
+            {*/
+            //var rows = MiniExcel.Query(ExcelPath, sheetName: sheetName).ToList();
+            //var rows = MiniExcel.Query(ExcelPath, sheetName: sheetName).Cast<IDictionary<string, object>>().ToList();
+            //暂时只需要第一张表
+            var rows = MiniExcel.Query(ExcelPath, sheetName: SheetName).Cast<IDictionary<string, object>>().ToList();
+            /*string[] columns = new string[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+                                 "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+                                 "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ"};*/
+
+            string[] columns = ExcelHelper.GetColmunNames(StartColumn, EndColumn);
+
+            for (int i = 0; i < columns.Length; i++)
+            {
+                for (int j = 0; j < rows.Count; j++)
+                {
+                    var row = rows[j];
+                    if (row[columns[i]] != null)
+                    {
+                        var result = row[columns[i]].ToString();
+                        newdatas.Add(result);
+                    }
+                    else
+                    {
+                        newdatas.Add("");
+                    }
+                }
+
+                if (TemplateOptions == TemplateOptions.附件13)
+                {
+                    value.Add("name", newdatas[2]);
+                    value.Add("id", newdatas[1]);
+
+                    if (newdatas[0].Contains("2023"))
+                    {
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "A" + (k - 1).ToString();
+                            value.Add(key, newdatas[k]); // null代表暂时没有值
+                        }
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "B" + (k - 1).ToString();
+                            value.Add(key, null); // null代表暂时没有值
+                        }
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "C" + (k - 1).ToString();
+                            value.Add(key, null); // null代表暂时没有值
+                        }
+                    }
+
+                    if (newdatas[0].Contains("2024"))
+                    {
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "A" + (k - 1).ToString();
+                            value.Add(key, null); // null代表暂时没有值
+                        }
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "B" + (k - 1).ToString();
+                            value.Add(key, newdatas[k]); // null代表暂时没有值
+                        }
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "C" + (k - 1).ToString();
+                            value.Add(key, null); // null代表暂时没有值
+                        }
+                    }
+
+                    if (newdatas[0].Contains("2025"))
+                    {
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "A" + (k - 1).ToString();
+                            value.Add(key, null); // null代表暂时没有值
+                        }
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "B" + (k - 1).ToString();
+                            value.Add(key, null); // null代表暂时没有值
+                        }
+                        for (int k = 3; k < newdatas.Count; k++)
+                        {
+                            string key = "C" + (k - 1).ToString();
+                            value.Add(key, newdatas[k]); // null代表暂时没有值
+                        }
+                    }
+
+                    MiniExcel.SaveAsByTemplate(TmpPath + newdatas[2] + ".xlsx", TemplateExcelPath, value);
+                }
+                else
+                {
+                    value.Add("Name", newdatas[0]);
+                    value.Add("Id", newdatas[1]);
+                    for (int k = 3; k < newdatas.Count; k++)
+                    {
+                        string key = "A" + (k - 3).ToString();
+                        value.Add(key, newdatas[k]); // null代表暂时没有值
+                    }
+
+
+                    MiniExcel.SaveAsByTemplate(TmpPath + newdatas[0] + ".xlsx", TemplateExcelPath, value);
+                }
+
+
+
+                value.Clear();
+                newdatas.Clear();
+                await Task.Delay(50);
+
+                Schedule = 50d / (columns.Length - 1) * i;
+            }
+            /*}*/
+        }
+
+        [RelayCommand]
+        public async Task MergeExcelFiles()
+        {
+            #region 生成Excel
+            // 创建一个新的 Excel 文件
+            var newFile = new FileInfo(MergedName);
+            if (File.Exists(MergedName))
+            {
+                // 如果文件存在，删除文件
+                File.Delete(MergedName);
+            }
+
+            // 创建一个新的工作簿，用于存储合并后的数据
+            Workbook mergedWorkbook = new Workbook();
+            mergedWorkbook.Worksheets.Clear();
+
+            // 获取目录下所有 Excel 文件信息，并按照创建时间排序
+            var files = new DirectoryInfo(TmpPath).GetFiles("*.xlsx")
+                                                         .OrderBy(f => f.CreationTime)
+                                                         .ToList();
+            //文件数
+            int count = 0;
+
+            foreach (var file in files)
+            {
+                // 加载 Excel 文件
+                Workbook inputWorkbook = new Workbook(file.ToString());
+
+                // 遍历输入工作簿的每个工作表
+                foreach (Worksheet worksheet in inputWorkbook.Worksheets)
+                {
+                    // 检查文件是否存在
+                    if (File.Exists(Path.GetFileNameWithoutExtension(file.FullName)))
+                    {
+                        // 如果文件存在，删除文件
+                        File.Delete(Path.GetFileNameWithoutExtension(file.FullName));
+                    }
+
+                    await Task.Delay(1);
+                    count++;
+                    //实时进度
+                    Schedule = 50 + 50d / files.Count * count;
+                    mergedWorkbook.Worksheets.Add(file.Name).Copy(worksheet);
+                }
+            }
+            // 保存新文件
+            mergedWorkbook.Save(MergedName);
+            #endregion
+
+            #region 将Excel转换为XPS
+            Aspose.Cells.XpsSaveOptions xpsOptions = new Aspose.Cells.XpsSaveOptions();
+
+            // Set the PrintType to FitSheetOnOnePage
+            xpsOptions.OnePagePerSheet = true;
+
+            // 设置输出文件路径和名称
+            string xpsFilePath = Environment.CurrentDirectory + "\\Merged.xps";
+
+            // 使用工作簿和 XPS 选项进行转换
+            mergedWorkbook.Save(xpsFilePath, xpsOptions);
+            LoadXpsDocument(xpsFilePath);
+            #endregion
+
+
+
+
+        }
+        
+        [RelayCommand]
+        public async Task GenerateNewExcelFile()
+        {
+            Schedule = 0;
+            if (!Regex.IsMatch(MergedName, "[a-gA-G]"))
+            {
+                App.Current.Dispatcher.Invoke((System.Action)(() =>
+                {
+                    MessageBoxX.Show(null, "请先点击左侧按钮！", "消息提示", MessageBoxButton.OK, Panuon.WPF.UI.MessageBoxIcon.Warning);
+                }));
+                return;
+            }
+
+            if (string.IsNullOrEmpty(StartColumn) || string.IsNullOrEmpty(EndColumn))
+            {
+                App.Current.Dispatcher.Invoke((System.Action)(() =>
+                {
+                    MessageBoxX.Show(null, "请选择生成列数！", "消息提示", MessageBoxButton.OK, Panuon.WPF.UI.MessageBoxIcon.Warning);
+                }));
+                return;
+            }
+
+
+            IsEnabled = false;
+            //删除Tmp文件夹下所有文件
+            //IOUtil.Exists(TmpPath);
+            DirectoryInfo directory = new DirectoryInfo(TmpPath);
+            if (directory != null)
+            {
+                foreach (FileInfo file in directory.GetFiles())
+                {
+                    file.Delete();
+                }
+            }
+
+            if (Options == Options.横向数据源)
+            {
+                await OutputExcelsWithHorizontal();
+            }
+            else if (Options == Options.纵向数据源)
+            {
+                await OutputExcelsWithVertical();
+            }
+            else
+            {
+                App.Current.Dispatcher.Invoke((System.Action)(() =>
+                {
+                    MessageBoxX.Show(null, "当先数据源未定义！", "消息提示", MessageBoxButton.OK, Panuon.WPF.UI.MessageBoxIcon.Warning);
+                }));
+                IsEnabled = true;
+                return;
+            }
+
+            await MergeExcelFiles();
+
+            App.Current.Dispatcher.Invoke((System.Action)(() =>
+            {
+                MessageBoxX.Show(null, "新文件已生成！", "消息提示", MessageBoxButton.OK, Panuon.WPF.UI.MessageBoxIcon.Success);
+            }));
+            IsEnabled = true;
+        }
+        #endregion
+
+        #region PPT
+
 
 
         private void LoadXpsDocument(string xpsFilePath)
         {
-            // 创建 XpsDocument 对象并打开 XPS 文件
-            using (XpsDocument xpsDocument = new XpsDocument(xpsFilePath, FileAccess.ReadWrite))
+        Preview:
+            try
             {
-                // 获取 XPS 文档的 FixedDocumentSequence
-                FixedDocumentSequence fixedDocSeq = xpsDocument.GetFixedDocumentSequence();
+                // 创建 XpsDocument 对象并打开 XPS 文件
+                using (XpsDocument xpsDocument = new XpsDocument(xpsFilePath, FileAccess.ReadWrite))
+                {
+                    // 获取 XPS 文档的 FixedDocumentSequence
+                    FixedDocumentSequence fixedDocSeq = xpsDocument.GetFixedDocumentSequence();
 
-                // 设置 DocumentViewer 的 Document 属性为 XPS 文档
-                Document = fixedDocSeq;
+                    // 设置 DocumentViewer 的 Document 属性为 XPS 文档
+                    Document = fixedDocSeq;
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                goto Preview;
+            }
+
         }
 
 
@@ -70,7 +530,10 @@ namespace DragonKing.ViewModel
             //#endregion
             //doc.LoadFromFile(Environment.CurrentDirectory + @"\666.docx");
             //doc.SaveToFile(Environment.CurrentDirectory + @"\666.xps", FileFormat.XPS);
-            LoadXpsDocument(Environment.CurrentDirectory + @"\666.xps");
+
+            LoadXpsDocument(Environment.CurrentDirectory + @"\669.xps");
+
+
 
             //reportView.DataContext= this;
             //reportView.Show();
@@ -80,13 +543,13 @@ namespace DragonKing.ViewModel
         public void ChangeReport()
         {
             Document doc = new Document();
-            #region 破解spire的license
-            var Lic = new Spire.License.InternalLicense();
-            Lic.LicenseType = Spire.License.LicenseType.Runtime;
-            Lic.AssemblyList = new string[] { "Spire.DocViewer.Wpf" };
-            var InternalLicense = doc.GetType().GetProperty("InternalLicense", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            InternalLicense.SetValue(doc, Lic);
-            #endregion
+            //#region 破解spire的license
+            //var Lic = new Spire.License.InternalLicense();
+            //Lic.LicenseType = Spire.License.LicenseType.Runtime;
+            //Lic.AssemblyList = new string[] { "Spire.DocViewer.Wpf" };
+            //var InternalLicense = doc.GetType().GetProperty("InternalLicense", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            //InternalLicense.SetValue(doc, Lic);
+            //#endregion
             //doc.LoadFromFile(Environment.CurrentDirectory + @"\Report\20230808\666.docx");
             //doc.SaveToFile(Environment.CurrentDirectory + @"\Report\20230808\666.xps", FileFormat.XPS);
 
@@ -193,7 +656,6 @@ namespace DragonKing.ViewModel
 
                 foreach (XWPFTableRow row in tables[2].Rows)
                 {
-
                     //iRow = tables[0].Rows.IndexOf(row);//获取该循环在List集合中的索引
                     foreach (XWPFTableCell cell in row.GetTableCells())
                     {
@@ -204,7 +666,7 @@ namespace DragonKing.ViewModel
                             {
                                 if (para.Text == "<a" + i + ">")
                                 {
-                                    para.ReplaceText("<a" + i + ">", data[i]); //V1-V8
+                                    para.ReplaceText("<a" + i + ">", data[i]);
                                 }
                             }
                         }
@@ -220,12 +682,12 @@ namespace DragonKing.ViewModel
                     Directory.CreateDirectory(reportfolderpath);
                 }
 
-                string saveFile = Path.Combine(reportfolderpath, "测试报告" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx");
+                string saveFile = Path.Combine(reportfolderpath, "测试报告" + ".docx");
                 FileStream out1 = new FileStream(saveFile, FileMode.Create);
                 doc.Write(out1);
                 out1.Close();
 
-                MessageBox.Show("报告生成结束！");
+                MessageBoxX.Show("报告生成结束!", "提示", MessageBoxButton.OK, Panuon.WPF.UI.MessageBoxIcon.Success, DefaultButton.YesOK, 5);
             }
         }
 
@@ -351,14 +813,14 @@ namespace DragonKing.ViewModel
         public void Print()
         {
             // 打开一个现有的Word文档
-            Document document = new Document();
+            Spire.Doc.Document document = new Spire.Doc.Document();
 
             #region 破解spire的license
-            var Lic = new Spire.License.InternalLicense();
-            Lic.LicenseType = Spire.License.LicenseType.Runtime;
-            Lic.AssemblyList = new string[] { "Spire.DocViewer.Wpf" };
-            var InternalLicense = document.GetType().GetProperty("InternalLicense", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            InternalLicense.SetValue(document, Lic);
+            //var Lic = new Spire.License.InternalLicense();
+            //Lic.LicenseType = Spire.License.LicenseType.Runtime;
+            //Lic.AssemblyList = new string[] { "Spire.DocViewer.Wpf" };
+            //var InternalLicense = document.GetType().GetProperty("InternalLicense", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            //InternalLicense.SetValue(document, Lic);
             #endregion
 
             document.LoadFromFile(Environment.CurrentDirectory + @"\Report\20230807\888.docx");
@@ -379,6 +841,7 @@ namespace DragonKing.ViewModel
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 printDoc.Print();
+                MessageBoxX.Show("打印成功!", "提示", MessageBoxButton.OK, Panuon.WPF.UI.MessageBoxIcon.Success, DefaultButton.YesOK, 5);
             }
         }
 
@@ -395,6 +858,73 @@ namespace DragonKing.ViewModel
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test.xlsx");
             wb.Workbook.Save(path);
 
+
+            MessageBoxX.Show("Asopose测试成功!", "提示", MessageBoxButton.OK, Panuon.WPF.UI.MessageBoxIcon.Success, DefaultButton.YesOK, 5);
         }
+
+        [RelayCommand]
+        public async void ModifyPPT()
+        {
+            await Task.Run(() =>
+             {
+                 using (Presentation ppt = new Presentation(Environment.CurrentDirectory + @"\ppt.pptx"))
+                 {
+
+                     for (int i = 3; i < ppt.Slides.Count; i++)
+                     {
+                         ISlide slide = ppt.Slides[i];
+
+                         foreach (IPictureFrame pictureFrame in slide.Shapes.OfType<IPictureFrame>())
+                         {
+                             pictureFrame.PictureFrameLock.AspectRatioLocked = false;//设置纵横比是否锁定
+                                                                                     // 设置图片位置和大小
+                             pictureFrame.X = 70;  // 设置横向位置
+                             pictureFrame.Y = 120;  // 设置纵向位置
+                             pictureFrame.Width = 820;  // 设置宽度
+                             pictureFrame.Height = 400; // 设置高度
+                         }
+                     }
+                     //ppt.Save("668.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                     ppt.Save("669.xps", Aspose.Slides.Export.SaveFormat.Xps);
+                 }
+                 App.Current.Dispatcher.Invoke((System.Action)(() =>
+                 {
+                     MessageBoxX.Show("PPT修改成功!", "提示", MessageBoxButton.OK, Panuon.WPF.UI.MessageBoxIcon.Success, DefaultButton.YesOK, 5);
+                 }));
+
+             });
+
+
+        }
+        #endregion
+
+        #region MoonPdf
+
+        [ObservableProperty]
+        private MoonPdfPanel _pdfPanel;
+
+
+
+        [RelayCommand]
+        public void OpenFile()
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog { Title = "Select PDF file...", DefaultExt = ".pdf", Filter = "PDF file (.pdf)|*.pdf", CheckFileExists = true };
+
+            if (dlg.ShowDialog() == true)
+            {
+                try
+                {
+                    PdfPanel.OpenFile(dlg.FileName);
+                    PdfPanel.ZoomToWidth();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format("An error occured: " + ex.Message));
+                }
+            }
+        }
+
+        #endregion
+
     }
 }

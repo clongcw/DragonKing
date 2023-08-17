@@ -80,4 +80,34 @@
         <Setter Property="pu:DropDownHelper.CornerRadius" Value="5" />
 
     </Style>
+
+    <Style
+        x:Key="StandardComboBoxStyle"
+        BasedOn="{StaticResource {x:Static purs:StyleKeys.ComboBoxStyle}}"
+        TargetType="ComboBox">
+        <Setter Property="pu:IconHelper.Foreground" Value="{DynamicResource InputWatermarkForeground}" />
+        <Setter Property="pu:IconHelper.FontSize" Value="16" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="MinWidth" Value="80" />
+        <Setter Property="Padding" Value="5,0" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource InputForeground}" />
+        <Setter Property="pu:ComboBoxHelper.WatermarkForeground" Value="{DynamicResource InputWatermarkForeground}" />
+        <Setter Property="pu:ComboBoxHelper.CornerRadius" Value="5" />
+        <Setter Property="pu:ComboBoxHelper.ItemsHoverBackground" Value="{DynamicResource ItemHoverBrush}" />
+        <Setter Property="pu:ComboBoxHelper.ItemsSelectedBackground" Value="{DynamicResource ThemeBrush}" />
+        <Setter Property="pu:ComboBoxHelper.ItemsSelectedForeground" Value="{DynamicResource MessageInverseForeground}" />
+        <Setter Property="pu:ComboBoxHelper.ItemsPadding" Value="10,0" />
+        <Setter Property="pu:ShadowHelper.Opacity" Value="0.25" />
+        <Setter Property="pu:ShadowHelper.BlurRadius" Value="25" />
+        <Setter Property="pu:DropDownHelper.Background" Value="{DynamicResource DropDownBackground}" />
+        <Setter Property="pu:DropDownHelper.BorderBrush" Value="{DynamicResource DropDownBorderBrush}" />
+        <Setter Property="pu:DropDownHelper.BorderThickness" Value="1" />
+        <Setter Property="pu:DropDownHelper.ShadowColor" Value="{DynamicResource DropDownShadowColor}" />
+        <Setter Property="pu:DropDownHelper.MinHeight" Value="120" />
+        <Setter Property="pu:DropDownHelper.CornerRadius" Value="5" />
+    </Style>
 </ResourceDictionary>
