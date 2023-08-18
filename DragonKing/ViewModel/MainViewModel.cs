@@ -36,7 +36,7 @@ namespace DragonKing.ViewModel
             _userService = userService;
             _roleService = roleService;
 
-            Content = App.Current._host.Services.GetService<OfficeView>();
+            Content = App.Current._host.Services.GetService<TaskView>();
             User = Const.User;
 
             #region 刷新时间
@@ -76,6 +76,9 @@ namespace DragonKing.ViewModel
                     break;
                 case "Office":
                     Content = App.Current._host.Services.GetService<OfficeView>();
+                    break;
+                case "线程":
+                    Content = App.Current._host.Services.GetService<TaskView>();
                     break;
                 case "设置":
                     Content = App.Current._host.Services.GetService<SettingsView>();

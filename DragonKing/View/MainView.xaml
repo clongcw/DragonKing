@@ -45,6 +45,13 @@
             <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}">
                 <ListBoxItem.Content>
                     <StackPanel>
+                        <TextBlock Text="线程" />
+                    </StackPanel>
+                </ListBoxItem.Content>
+            </ListBoxItem>
+            <ListBoxItem Style="{StaticResource MainMenuListBoxItemStyle}">
+                <ListBoxItem.Content>
+                    <StackPanel>
                         <TextBlock Text="Office" />
                     </StackPanel>
                 </ListBoxItem.Content>
