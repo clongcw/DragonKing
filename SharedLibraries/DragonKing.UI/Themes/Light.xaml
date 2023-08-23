@@ -21,4 +21,60 @@
     <SolidColorBrush x:Key="ThemeBrush">#5030E5</SolidColorBrush>
     <SolidColorBrush x:Key="ThemeBrushTrans6">#665030E5</SolidColorBrush>
 
+
+    <Color x:Key="MainColor">#DEEEFF</Color>
+    <Color x:Key="BorderColor">#FFB1E2EE</Color>
+    <Color x:Key="LightColor">White</Color>
+    <Color x:Key="ActiveColor">#FFC1C6F1</Color>
+    <Color x:Key="HeaderColor">#FFEDFAFE</Color>
+    <Color x:Key="InnerColor" >#FFB1E2EE</Color>
+    <Color x:Key="HitColor">Goldenrod</Color>
+    <Color x:Key="ControlFillColor">#FF00c981</Color>
+
+    <Color x:Key="EmptyColor">LightGray</Color>
+    <Color x:Key="BkColor">AliceBlue</Color>
+    <Color x:Key="HiLiColor">#FF0FFF2F</Color>
+    <Color x:Key="IcColor">#FD6969</Color>
+    <!--<Color x:Key="RefColor">#806BFF</Color>-->
+    <Color x:Key="ReagentColor">#4fdebb</Color>
+    <Color x:Key="ExtColor">#5dc8f0</Color>
+    <Color x:Key="LoadedColor">DarkGreen</Color>
+    <Color x:Key="TipColor">#b7c3d1</Color>
+    <Color x:Key="TempColor">#cbd8e7</Color>
+    <Color x:Key="TubeColor">#005bd6</Color>
+    <Color x:Key="WasteColor">#ff5f5f</Color>
+    <Color x:Key="IndexColor">#ffaa5f</Color>
+    <Color x:Key="GroupColor">#005bd6</Color>
+    <Color x:Key="ToolButtonColor">#FF8984EF</Color>
+    <Color x:Key="ToolButtonDisabledColor">#FF909090</Color>
+    <Color x:Key="LeftTimeColor">#8ea2ad</Color>
+    <Color x:Key="CurrentProcessColor">Green</Color>
+
+    <SolidColorBrush x:Key="EmptyBrush" Color="{StaticResource EmptyColor}"/>
+    <SolidColorBrush x:Key="BkBrush" Color="{StaticResource BkColor}"/>
+    <SolidColorBrush x:Key="IcBrush" Color="{StaticResource IcColor}"/>
+    <SolidColorBrush x:Key="ReagentBrush" Color="{StaticResource ReagentColor}"/>
+    <SolidColorBrush x:Key="HiLiBrush" Color="{StaticResource HiLiColor}"/>
+    <SolidColorBrush x:Key="ExtBrush" Color="{StaticResource ExtColor}"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="LightBrush" Color="{StaticResource LightColor}" />
+    <SolidColorBrush x:Key="ActiveBrush" Color="{StaticResource ActiveColor}" />
+    <SolidColorBrush x:Key="HeaderBrush" Color="{StaticResource HeaderColor}" />
+    <SolidColorBrush x:Key="InnerBrush" Color="{StaticResource InnerColor}" />
+    <SolidColorBrush x:Key="GrayBrush" Color="{StaticResource ExtColor}" />
+    <SolidColorBrush x:Key="HitBrush" Color="{StaticResource HitColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="LoadedBrush" Color="{StaticResource LoadedColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="FillBrush" Color="{StaticResource ControlFillColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="TipBrush" Color="{StaticResource TipColor}"/>
+    <SolidColorBrush x:Key="TempBrush" Color="{StaticResource TempColor}"/>
+    <SolidColorBrush x:Key="TubeBrush" Color="{StaticResource TubeColor}"></SolidColorBrush>
+    <SolidColorBrush x:Key="WasteBrush" Color="{StaticResource WasteColor}" />
+    <SolidColorBrush x:Key="IndexBrush" Color="{StaticResource IndexColor}" />
+    <SolidColorBrush x:Key="GroupBrush" Color="{StaticResource GroupColor}" />
+    <SolidColorBrush x:Key="ToolButtonBrush" Color="{StaticResource ToolButtonColor}" />
+    <SolidColorBrush x:Key="ToolButtonDisabledBrush" Color="{StaticResource ToolButtonDisabledColor}" />
+    <SolidColorBrush x:Key="LeftTimeBrush" Color="{StaticResource LeftTimeColor}" />
+    <SolidColorBrush x:Key="CurrentProcessBrush" Color="{StaticResource CurrentProcessColor}" />
+    <SolidColorBrush x:Key="PcrFillBrush" Color="Green"></SolidColorBrush>
+
 </ResourceDictionary>

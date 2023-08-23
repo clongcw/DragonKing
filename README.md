@@ -7,4 +7,7 @@
 ## 界面预览
 
 ![anchor text](./Image/signin.png "登录界面")
-![anchor text](./Image/main.png "主界面")
+![anchor text](./Image/mainUI2.png "主界面")
+![anchor text](./Image/result.png "结果查询")
+![anchor text](./Image/office.png "office")
+![anchor text](./Image/setting.png "设置")

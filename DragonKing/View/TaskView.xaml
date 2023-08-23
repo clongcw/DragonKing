@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:DragonKing.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <StackPanel>
         <Button Command="{Binding DoCommand}" Content="执行"/>
-    </Grid>
+        <Button Command="{Binding SetNumCommand}" Content="Set"/>
+    </StackPanel>
 </UserControl>

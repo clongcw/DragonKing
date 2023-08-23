@@ -44,7 +44,7 @@ namespace DragonKing.ViewModel
             int currentnum = 0;
 
             // 使用一个LiqD的信号量来控制同时只能有一个LiqD在运行
-            SemaphoreSlim liqDSemaphore = new SemaphoreSlim(1,1);
+            SemaphoreSlim liqDSemaphore = new SemaphoreSlim(1, 1);
 
             Task taskD = null;
 
@@ -67,7 +67,7 @@ namespace DragonKing.ViewModel
                 }
                 else if (taskItem.TaskType == TaskType.Pcr)
                 {
-                    Task.Run(() =>
+                    _ = Task.Run(() =>
                     {
                         while (true)
                         {
@@ -78,7 +78,7 @@ namespace DragonKing.ViewModel
                                 _log.Information($"{taskItem.Person} 完成任务：{taskItem.TaskType}");
                                 break;
                             }
-                            
+
                         }
                     });
                 }
@@ -127,17 +127,9 @@ namespace DragonKing.ViewModel
 
         #endregion
 
-        #region 方案二
-        [RelayCommand]
-        public async Task Do1()
-        {
-
-        }
-
-
-        #endregion
-
+        
     }
+
 
     public enum TaskType
     {

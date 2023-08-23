@@ -22,7 +22,7 @@
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <ListBox SelectedIndex="2" Style="{StaticResource SubMenuListBoxStyle}">
+        <ListBox SelectedIndex="0" Style="{StaticResource SubMenuListBoxStyle}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" />
@@ -78,7 +78,6 @@
 
         <ContentControl
             Grid.Row="1"
-            Margin="10"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             BorderThickness="0"
